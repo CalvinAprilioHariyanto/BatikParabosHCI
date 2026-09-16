@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Batik Parabos — Digital Atelier</title>
-  <meta name="description" content="Batik Parabos is a digital atelier celebrating the art of Indonesian Batik. Explore our curated collection of handcrafted contemporary Batik garments.">
+  <meta name="description" content="Batik Parabos is a digital atelier celebrating the art of Indonesian Batik. Where tradition becomes character — discover the craft behind every piece.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Batik Parabos — Digital Atelier">
+  <meta property="og:description" content="Where tradition becomes character. Discover the craft behind every piece.">
+  <meta property="og:type" content="website">
 
   <!-- Preconnect for Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,16 +35,25 @@
   <main id="main-content">
 
     <!-- ══════════════════════════════════════════════════════
-         §1  HERO — Digital Atelier Gateway
+         §1  HERO — Cinematic Gateway
     ══════════════════════════════════════════════════════ -->
     <section class="hero" aria-label="Hero">
 
       <div class="hero__bg"></div>
 
-      <!-- Background image (placeholder; swap src for real editorial photography) -->
       <div class="hero__image-frame hero__parallax">
+        <video 
+          class="hero__media hero__video"
+          src="https://parabos.online/__l5e/assets-v1/a1c9ec1b-d536-433f-be38-0cc360d6345f/parabos-showcase-audio.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
         <img
-          src="assets/images/placeholder.svg"
+          class="hero__media hero__fallback-img"
+          src="assets/images/tes.jpg"
           alt="A craftsman's hands carefully stamping a Batik pattern on fine cloth"
           width="1920"
           height="1080"
@@ -54,18 +68,20 @@
             <span class="hero__kicker">Batik Parabos &nbsp;·&nbsp; Digital Atelier</span>
 
             <h1 class="hero__headline">
-              Batik,<br>
-              <em>Reimagined.</em>
+              Where tradition<br>
+              becomes<br>
+              <em>character.</em>
             </h1>
 
             <p class="hero__sub">
-              A contemporary expression of Indonesian heritage and craftsmanship —
-              designed for those who wear their identity with intention.
+              Discover the craft behind every piece —
+              Indonesian heritage reimagined for those
+              who wear their identity with intention.
             </p>
 
             <div class="hero__actions">
-              <a href="collection.html" class="btn btn-primary">Explore Collection</a>
-              <a href="heritage.html" class="btn btn-ghost">Our Heritage</a>
+              <a href="#craft-story" class="btn btn-primary hero__scroll-to">Explore the Craft</a>
+              <a href="collection.html" class="btn btn-ghost">Shop the Collection</a>
             </div>
           </div>
 
@@ -88,7 +104,6 @@
     ══════════════════════════════════════════════════════ -->
     <div class="marquee-strip" aria-hidden="true">
       <div class="marquee-track">
-        <!-- Two identical sets for seamless loop -->
         <div class="marquee-item"><span class="marquee-dot"></span>Hand-Stamped Batik</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Cotton Primissima</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Natural Dye Traditions</div>
@@ -96,6 +111,7 @@
         <div class="marquee-item"><span class="marquee-dot"></span>Contemporary Silhouettes</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Bespoke Commissions</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Private Atelier Visits</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Five Stages of Craft</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Hand-Stamped Batik</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Cotton Primissima</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Natural Dye Traditions</div>
@@ -103,18 +119,230 @@
         <div class="marquee-item"><span class="marquee-dot"></span>Contemporary Silhouettes</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Bespoke Commissions</div>
         <div class="marquee-item"><span class="marquee-dot"></span>Private Atelier Visits</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Five Stages of Craft</div>
       </div>
     </div>
 
 
     <!-- ══════════════════════════════════════════════════════
-         §3  IMMERSIVE / PARALLAX PANEL
+         §3  MATERIAL — It begins with cloth
+    ══════════════════════════════════════════════════════ -->
+    <section class="material-intro" aria-label="Material">
+      <div class="container">
+        <div class="material-intro__layout">
+
+          <div class="material-intro__text">
+            <span class="eyebrow reveal">The Material</span>
+            <h2 class="material-intro__headline reveal reveal--delay-1">
+              It begins<br>with <em>cloth.</em>
+            </h2>
+            <p class="material-intro__body reveal reveal--delay-2">
+              Every piece begins before the pattern, before the wax, before the dye.
+              It begins with a length of Cotton Primissima — a weave so fine it drinks
+              colour like skin drinks light. The cloth is everything.
+            </p>
+            <a href="heritage.html" class="btn btn-secondary reveal reveal--delay-3">
+              Read Our Heritage
+            </a>
+          </div>
+
+          <div class="material-intro__visual reveal reveal--delay-1">
+            <div class="material-intro__cloth-wrap">
+              <img
+                src="assets/images/cloth.jpg"
+                alt="Fine batik cloth texture"
+                loading="lazy"
+              >
+              <div class="material-intro__cloth-overlay"></div>
+              <div class="material-intro__cloth-caption">
+                <span class="material-intro__caption-label">Cotton Primissima</span>
+                <span class="material-intro__caption-sub">Surakarta, Java</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §4  CRAFT STORY — Interactive Scroll Process
+         "From cloth to character"
+    ══════════════════════════════════════════════════════ -->
+    <section class="craft-story" id="craft-story" aria-label="The craft process">
+
+      <div class="craft-story__header container">
+        <span class="eyebrow reveal">From Cloth to Character</span>
+        <h2 class="craft-story__headline reveal reveal--delay-1">
+          Five stages.<br><em>One garment.</em>
+        </h2>
+        <p class="craft-story__sub reveal reveal--delay-2">
+          Scroll to move through the transformation.
+        </p>
+      </div>
+
+      <!-- Sticky scroll experience -->
+      <div class="craft-story__scroll-zone" id="craft-scroll-zone">
+
+        <!-- Left: sticky cloth canvas -->
+        <div class="craft-story__sticky-panel" id="craft-sticky-panel" aria-hidden="true">
+          <div class="craft-story__cloth" id="craft-cloth">
+
+            <!-- Stage layers — JS controls opacity/transform via scroll progress -->
+            <div class="craft-layer craft-layer--base" id="craft-layer-0">
+              <img src="assets/images/raw_cloth.jpg" alt="" aria-hidden="true">
+              <div class="craft-layer__overlay craft-overlay--raw"></div>
+              <div class="craft-layer__label">Raw Cloth</div>
+            </div>
+
+            <div class="craft-layer craft-layer--pattern" id="craft-layer-1">
+              <div class="craft-pattern-grid" aria-hidden="true">
+                <!-- SVG pattern lines drawn via CSS + JS -->
+                <svg class="craft-pattern-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <!-- Kawung circle motif — simplified -->
+                  <g class="pattern-kawung" fill="none" stroke="rgba(201,162,39,0.5)" stroke-width="0.8">
+                    <circle cx="100" cy="100" r="40"/>
+                    <circle cx="200" cy="100" r="40"/>
+                    <circle cx="300" cy="100" r="40"/>
+                    <circle cx="100" cy="200" r="40"/>
+                    <circle cx="200" cy="200" r="40"/>
+                    <circle cx="300" cy="200" r="40"/>
+                    <circle cx="100" cy="300" r="40"/>
+                    <circle cx="200" cy="300" r="40"/>
+                    <circle cx="300" cy="300" r="40"/>
+                    <!-- Inner diamonds -->
+                    <path d="M100,60 L140,100 L100,140 L60,100 Z"/>
+                    <path d="M200,60 L240,100 L200,140 L160,100 Z"/>
+                    <path d="M300,60 L340,100 L300,140 L260,100 Z"/>
+                    <path d="M100,160 L140,200 L100,240 L60,200 Z"/>
+                    <path d="M200,160 L240,200 L200,240 L160,200 Z"/>
+                    <path d="M300,160 L340,200 L300,240 L260,200 Z"/>
+                    <path d="M100,260 L140,300 L100,340 L60,300 Z"/>
+                    <path d="M200,260 L240,300 L200,340 L160,300 Z"/>
+                    <path d="M300,260 L340,300 L300,340 L260,300 Z"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="craft-layer__label">Pattern Transferred</div>
+            </div>
+
+            <div class="craft-layer craft-layer--wax" id="craft-layer-2">
+              <div class="craft-wax-effect" aria-hidden="true">
+                <div class="wax-canting" id="wax-canting"></div>
+                <div class="wax-lines" id="wax-lines"></div>
+              </div>
+              <div class="craft-layer__label">Wax Applied</div>
+            </div>
+
+            <div class="craft-layer craft-layer--dye" id="craft-layer-3">
+              <img src="assets/images/dye.jpg" alt="" class="dye-pool-img" aria-hidden="true">
+              <div class="craft-layer__label">Dye Spreads</div>
+            </div>
+
+            <div class="craft-layer craft-layer--final" id="craft-layer-4">
+              <img src="assets/images/final.jpeg" alt="" aria-hidden="true">
+              <div class="craft-layer__overlay craft-overlay--final"></div>
+              <div class="craft-layer__label craft-layer__label--gold">The Piece</div>
+            </div>
+
+          </div>
+
+          <!-- Stage progress bar -->
+          <div class="craft-story__progress" aria-hidden="true">
+            <div class="craft-progress-track">
+              <div class="craft-progress-fill" id="craft-progress-fill"></div>
+            </div>
+            <div class="craft-progress-steps">
+              <span class="craft-progress-step" data-step="0">01</span>
+              <span class="craft-progress-step" data-step="1">02</span>
+              <span class="craft-progress-step" data-step="2">03</span>
+              <span class="craft-progress-step" data-step="3">04</span>
+              <span class="craft-progress-step" data-step="4">05</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: scrollable stage descriptions -->
+        <div class="craft-story__stages" id="craft-stages">
+
+          <div class="craft-stage" data-stage="0">
+            <span class="craft-stage__number">01</span>
+            <div class="craft-stage__content">
+              <h3 class="craft-stage__title">Cloth Preparation</h3>
+              <p class="craft-stage__body">
+                Cotton Primissima is washed, boiled, and sun-dried to remove starch
+                and impurities. Only cloth that passes our hand-feel test proceeds.
+                This stage takes a full day. It cannot be rushed.
+              </p>
+            </div>
+          </div>
+
+          <div class="craft-stage" data-stage="1">
+            <span class="craft-stage__number">02</span>
+            <div class="craft-stage__content">
+              <h3 class="craft-stage__title">Pattern Transfer</h3>
+              <p class="craft-stage__body">
+                Traditional motifs — Kawung, Parang, Mega Mendung — are transferred
+                by hand onto the cloth surface using pencil guides. Each line is
+                intentional. No digital projection is used.
+              </p>
+            </div>
+          </div>
+
+          <div class="craft-stage" data-stage="2">
+            <span class="craft-stage__number">03</span>
+            <div class="craft-stage__content">
+              <h3 class="craft-stage__title">Wax Application</h3>
+              <p class="craft-stage__body">
+                Hot wax is applied with a stamp (cap) or a hand tool (canting).
+                The wax forms a resist barrier, defining which areas will remain
+                undyed in the final garment. This is where the motif becomes real.
+              </p>
+            </div>
+          </div>
+
+          <div class="craft-stage" data-stage="3">
+            <span class="craft-stage__number">04</span>
+            <div class="craft-stage__content">
+              <h3 class="craft-stage__title">Natural Dyeing</h3>
+              <p class="craft-stage__body">
+                We dye in sequence — light tones first, building depth through
+                successive dye baths. Each dip is timed by experience, not a clock.
+                Sogan earth tones. Indigo depth. Slow colour.
+              </p>
+            </div>
+          </div>
+
+          <div class="craft-stage" data-stage="4">
+            <span class="craft-stage__number">05</span>
+            <div class="craft-stage__content">
+              <h3 class="craft-stage__title">Finishing &amp; Tailoring</h3>
+              <p class="craft-stage__body">
+                Wax is removed by boiling. The cloth is pressed, inspected, and
+                cut to our patterns by our in-house tailors. Each garment is
+                signed before it leaves the atelier.
+              </p>
+              <a href="heritage.html" class="btn btn-secondary craft-stage__cta">
+                Full Heritage Story
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /.craft-story__scroll-zone -->
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §5  IMMERSIVE / PHILOSOPHY PANEL
     ══════════════════════════════════════════════════════ -->
     <section class="immersive" aria-label="About Batik Parabos">
 
       <div class="immersive__bg-layer" aria-hidden="true">
         <img
-          src="assets/images/placeholder.svg"
+          src="assets/images/philosophy.jpg"
           alt=""
           width="1920"
           height="1080"
@@ -147,149 +375,62 @@
         </div>
       </div>
 
-      <!-- Large decorative number -->
       <span class="immersive__number" aria-hidden="true">01</span>
 
     </section>
 
 
     <!-- ══════════════════════════════════════════════════════
-         §4  HERITAGE SECTION
+         §6  DETAILS MATTER — Editorial Craftsmanship
     ══════════════════════════════════════════════════════ -->
-    <section class="heritage" aria-labelledby="heritage-heading">
+    <section class="details-matter" aria-label="Craftsmanship detail">
+      <div class="details-matter__layout">
 
-      <div class="heritage__grid">
-
-        <!-- Image column -->
-        <div class="heritage__image-col">
+        <div class="details-matter__image-block">
           <img
-            src="assets/images/placeholder.svg"
-            alt="A Batik craftsman working in the atelier at Batik Parabos"
-            width="900"
-            height="1100"
+            src="assets/images/craftmanship.jpg"
+            alt="Close-up of batik pattern detail"
             loading="lazy"
           >
         </div>
 
-        <!-- Text column -->
-        <div class="heritage__text-col">
-
-          <span class="eyebrow reveal">Indonesian Heritage</span>
-
-          <h2 class="heritage__quote reveal reveal--delay-1" id="heritage-heading">
-            Patterns that carry<br>the memory of Java.
+        <div class="details-matter__text-block">
+          <span class="eyebrow reveal">Craftsmanship</span>
+          <h2 class="details-matter__headline reveal reveal--delay-1">
+            The details<br><em>matter.</em>
           </h2>
-
-          <p class="heritage__body reveal reveal--delay-2">
-            Batik Parabos was born in Surakarta — a city whose royal court
-            traditions gave the world some of its most enduring textile art.
-            Each motif in our collection carries a history: Sogan earth tones
-            from the Solo court, Parang diagonals of the Mataram kingdom,
-            Kawung circles of purity.
+          <div class="details-matter__divider" aria-hidden="true"></div>
+          <p class="details-matter__body reveal reveal--delay-2">
+            Every edge, every join, every finishing stitch is considered.
+            We do not produce garments at volume. We produce pieces —
+            each one inspected before it leaves the atelier.
           </p>
-          <p class="heritage__body reveal reveal--delay-2">
-            We do not replicate tradition. We converse with it — bringing the
-            same devotion to craft into contemporary garments that belong in
-            the present.
-          </p>
-
-          <div class="heritage__facts reveal reveal--delay-2">
-            <div class="heritage__fact">
-              <p class="heritage__fact-num">5</p>
-              <p class="heritage__fact-label">Craftsmanship Stages</p>
+          <div class="details-matter__specs reveal reveal--delay-2">
+            <div class="details-spec">
+              <span class="details-spec__label">Motif</span>
+              <span class="details-spec__value">Kawung · Parang · Mega Mendung · Sogan</span>
             </div>
-            <div class="heritage__fact">
-              <p class="heritage__fact-num">40+</p>
-              <p class="heritage__fact-label">Years of Tradition</p>
+            <div class="details-spec">
+              <span class="details-spec__label">Material</span>
+              <span class="details-spec__value">Cotton Primissima · Silk Blend · Linen</span>
+            </div>
+            <div class="details-spec">
+              <span class="details-spec__label">Process</span>
+              <span class="details-spec__value">Hand-Stamped Batik (Cap) · Canting</span>
+            </div>
+            <div class="details-spec">
+              <span class="details-spec__label">Origin</span>
+              <span class="details-spec__value">Surakarta, Central Java</span>
             </div>
           </div>
-
-          <a href="heritage.html" class="btn btn-secondary reveal reveal--delay-3">
-            Discover Our Heritage
-          </a>
-
         </div>
 
       </div>
-
     </section>
 
 
     <!-- ══════════════════════════════════════════════════════
-         §5  CRAFTSMANSHIP SECTION
-    ══════════════════════════════════════════════════════ -->
-    <section class="craft" aria-labelledby="craft-heading">
-
-      <div class="container">
-        <div class="craft__header">
-          <span class="eyebrow reveal">The Craft</span>
-          <h2 class="craft__headline reveal reveal--delay-1" id="craft-heading">
-            Five stages. One garment.
-          </h2>
-          <p class="text-muted reveal reveal--delay-2" style="max-width:520px; margin:0 auto;">
-            Every Batik Parabos piece moves through five distinct stages of craft
-            before it arrives with you. Each stage requires skill, patience, and care
-            that cannot be automated.
-          </p>
-        </div>
-
-        <div class="craft__grid">
-
-          <article class="craft__item reveal" data-step="01">
-            <span class="craft__step">Stage 01</span>
-            <h3 class="craft__item-title">Cloth Preparation</h3>
-            <p class="craft__item-body">
-              Cotton Primissima is washed, boiled, and sun-dried to remove starch
-              and impurities. Only cloth that passes our hand-feel test proceeds.
-            </p>
-          </article>
-
-          <article class="craft__item reveal reveal--delay-1" data-step="02">
-            <span class="craft__step">Stage 02</span>
-            <h3 class="craft__item-title">Pattern Transfer</h3>
-            <p class="craft__item-body">
-              Traditional motifs are transferred by hand onto the cloth surface using
-              pencil guides. Each line is intentional; no digital projection is used.
-            </p>
-          </article>
-
-          <article class="craft__item reveal reveal--delay-2" data-step="03">
-            <span class="craft__step">Stage 03</span>
-            <h3 class="craft__item-title">Wax Application</h3>
-            <p class="craft__item-body">
-              Hot wax is applied with a stamp (cap) or a hand tool (canting).
-              The wax forms a resist barrier, defining which areas will remain
-              undyed in the final garment.
-            </p>
-          </article>
-
-          <article class="craft__item reveal" data-step="04">
-            <span class="craft__step">Stage 04</span>
-            <h3 class="craft__item-title">Natural Dyeing</h3>
-            <p class="craft__item-body">
-              We dye in sequence — light tones first, building depth through
-              successive dye baths. Each dip is timed by experience, not a clock.
-            </p>
-          </article>
-
-          <article class="craft__item reveal reveal--delay-1" data-step="05">
-            <span class="craft__step">Stage 05</span>
-            <h3 class="craft__item-title">Finishing &amp; Tailoring</h3>
-            <p class="craft__item-body">
-              Wax is removed by boiling. The cloth is pressed, inspected, and
-              cut to our patterns by our in-house tailors. Each garment is
-              signed before it leaves the atelier.
-            </p>
-          </article>
-
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- ══════════════════════════════════════════════════════
-         §6  COLLECTION PREVIEW
+         §7  COLLECTION PREVIEW
     ══════════════════════════════════════════════════════ -->
     <section class="collection-preview" aria-labelledby="collection-heading">
       <div class="container">
@@ -298,11 +439,11 @@
           <div>
             <span class="eyebrow reveal">The Collection</span>
             <h2 class="collection-preview__headline reveal reveal--delay-1" id="collection-heading">
-              Selected Pieces
+              Now that you know<br>the craft — <em>discover the pieces.</em>
             </h2>
           </div>
-          <a href="collection.html" class="btn btn-secondary reveal">
-            Explore All Pieces
+          <a href="collection.html" class="btn btn-secondary reveal collection-preview__header-cta">
+            View All Pieces
           </a>
         </div>
 
@@ -314,9 +455,9 @@
           aria-label="Featured Collection"
         ></div>
 
-        <div style="text-align:center; margin-top:var(--spacing-xl);">
+        <div class="collection-preview__footer">
           <a href="collection.html" class="btn btn-primary reveal">
-            View Full Collection
+            Explore the Full Collection
           </a>
         </div>
 
@@ -325,13 +466,13 @@
 
 
     <!-- ══════════════════════════════════════════════════════
-         §7  ATELIER SECTION
+         §8  ATELIER SECTION
     ══════════════════════════════════════════════════════ -->
     <section class="atelier" aria-labelledby="atelier-heading">
 
       <div class="atelier__bg" aria-hidden="true">
         <img
-          src="assets/images/placeholder.svg"
+          src="assets/images/museum.jpg"
           alt=""
           width="1920"
           height="1080"
@@ -342,9 +483,8 @@
       <div class="container">
         <div class="atelier__inner">
 
-          <!-- Left: copy -->
           <div class="atelier__left">
-            <p class="atelier__label eyebrow reveal">Private Atelier</p>
+            <p class="atelier__label eyebrow reveal">Step Inside</p>
 
             <h2 class="atelier__headline reveal reveal--delay-1" id="atelier-heading">
               Visit the<br><em>Atelier.</em>
@@ -376,12 +516,11 @@
               </div>
             </div>
 
-            <a href="heritage.html#atelier" class="btn btn-secondary reveal reveal--delay-3">
+            <a href="atelier.html" class="btn btn-secondary reveal reveal--delay-3">
               Reserve an Atelier Visit
             </a>
           </div>
 
-          <!-- Right: decorative stat block -->
           <div class="atelier__right" aria-hidden="true">
             <div class="atelier__stat-block">
               <p class="atelier__stat-num">By</p>
@@ -400,25 +539,25 @@
 
 
     <!-- ══════════════════════════════════════════════════════
-         §8  FINAL CTA — Begin Your Collection
+         §9  FINAL CTA
     ══════════════════════════════════════════════════════ -->
     <section class="final-cta" aria-labelledby="final-cta-heading">
       <div class="container container--narrow">
 
-        <span class="eyebrow final-cta__eyebrow reveal">Begin</span>
+        <span class="eyebrow final-cta__eyebrow reveal">The Story Continues</span>
 
         <h2 class="final-cta__headline reveal reveal--delay-1" id="final-cta-heading">
-          Your<br><em>Collection</em><br>Awaits.
+          In every<br><em>piece.</em>
         </h2>
 
         <p class="final-cta__sub reveal reveal--delay-2">
-          Each piece in our collection was made to be worn, not merely admired.
-          Explore the full atelier and find the piece that speaks to you.
+          Each garment carries the full weight of the process you've just witnessed.
+          Find the one that speaks to you.
         </p>
 
         <div class="final-cta__actions reveal reveal--delay-3">
-          <a href="collection.html" class="btn btn-primary">Explore Collection</a>
-          <a href="heritage.html"   class="btn btn-secondary">Our Heritage</a>
+          <a href="collection.html" class="btn btn-primary">Explore the Collection</a>
+          <a href="atelier.html"    class="btn btn-secondary">Visit the Atelier</a>
         </div>
 
       </div>

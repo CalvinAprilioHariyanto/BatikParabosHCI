@@ -91,7 +91,7 @@
               <div class="product-size__header">
                 <span class="product-size__label">Size</span>
                 <!-- SECTION 9: Size Assistant -->
-                <button type="button" class="btn-text size-assistant-btn" id="open-size-assistant">Size Assistant — Preview</button>
+                <button type="button" class="size-assistant-btn" id="open-size-assistant">Size Assistant</button>
               </div>
               <div class="product-size__options" id="size-options" role="radiogroup" aria-label="Select Size">
                 <!-- Sizes injected by JS -->
@@ -116,14 +116,14 @@
 
             <!-- SECTION 7: Wishlist & SECTION 10: Virtual Fitting -->
             <div class="product-secondary-actions">
-              <button type="button" class="btn-text icon-btn" id="wishlist-btn">
+              <button type="button" class="icon-btn" id="wishlist-btn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
                 <span id="wishlist-text">Add to Wishlist</span>
               </button>
 
-              <button type="button" class="btn-text icon-btn" id="open-virtual-fitting">
+              <button type="button" class="icon-btn" id="open-virtual-fitting">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                   <circle cx="8.5" cy="8.5" r="1.5"></circle>
@@ -164,14 +164,19 @@
     </div>
   </dialog>
 
-  <!-- Size Assistant Modal (Simulation) -->
+  <!-- Size Assistant Modal (Side Drawer) -->
   <dialog id="size-modal" class="simulation-modal">
-    <button class="simulation-modal__close" aria-label="Close modal">✕</button>
     <div class="simulation-modal__header">
-      <h2>Size Assistant <span class="badge">Preview</span></h2>
+      <h2>Size Assistant <span class="badge-subtle">Preview</span></h2>
+      <button class="simulation-modal__close" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
     <div class="simulation-modal__body">
-      <p class="simulation-desc">Select your preferences for a personalized recommendation. (Frontend Demonstration)</p>
+      <p class="simulation-desc">Select your preferences for a personalized size recommendation based on Batik Parabos silhouettes.</p>
       
       <div class="form-group">
         <label for="sim-height">Height Range</label>
@@ -193,12 +198,20 @@
         </select>
       </div>
 
-      <button type="button" class="btn btn-secondary btn-block" id="sim-calculate-btn">Find My Size</button>
+      <button type="button" class="btn btn-primary btn-block sim-action-btn" id="sim-calculate-btn">Find My Size</button>
+
+      <!-- Simulated Analysis State (Hidden by default) -->
+      <div id="sim-analysis" class="sim-analysis hidden">
+        <div class="sim-spinner"></div>
+        <p class="sim-analysis-text">Analyzing proportions...</p>
+      </div>
 
       <div id="sim-result" class="sim-result hidden">
-        <p>Suggested size:</p>
+        <p class="sim-result-label">Your Recommendation</p>
         <h3 id="sim-suggested-size">-</h3>
-        <button type="button" class="btn btn-primary btn-block" id="sim-apply-size">Apply Size</button>
+        <p class="sim-result-desc">Best match for your selected fit preference.</p>
+        <button type="button" class="btn btn-secondary btn-block sim-apply-btn" id="sim-apply-size">Apply Size</button>
+        <p class="sim-result-disclaimer">Size recommendation is an estimate and may vary by garment style.</p>
       </div>
     </div>
   </dialog>

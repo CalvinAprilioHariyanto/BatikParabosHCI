@@ -32,8 +32,8 @@ function renderFooter() {
             <h5>Atelier</h5>
             <ul>
               <li><a href="heritage.html">Our Heritage</a></li>
-              <li><a href="heritage.html#atelier">Visit the Atelier</a></li>
-              <li><a href="heritage.html#commission">Bespoke Commission</a></li>
+              <li><a href="atelier.html">Visit the Atelier</a></li>
+              <li><a href="atelier.html">Bespoke Commission</a></li>
             </ul>
           </div>
 

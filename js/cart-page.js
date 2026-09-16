@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Items
     cart.forEach(item => {
       // Safe fallback for image
-      const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/placeholder.svg';
+      const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/tes.jpg';
       const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
       const lineTotal = item.price * item.quantity;
 

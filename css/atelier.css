@@ -85,7 +85,7 @@
 }
 
 .reservation__container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -137,10 +137,16 @@
    § EXPERIENCE CARDS (RADIO REPLACEMENT)
 ═══════════════════════════════════════════════════════ */
 .experience-options {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-xxl);
+}
+
+@media (max-width: 640px) {
+  .experience-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 .experience-card {
@@ -158,13 +164,13 @@
 
 .experience-card__content {
   border: 1px solid var(--line);
-  padding: var(--spacing-lg);
   background-color: var(--bg);
-  transition: all var(--transition-fast);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
 }
 
 .experience-card:hover .experience-card__content {
-  border-color: var(--muted);
+  border-color: rgba(167, 160, 151, 0.5);
 }
 
 .experience-card input[type="radio"]:checked + .experience-card__content {
@@ -177,17 +183,93 @@
   outline-offset: 2px;
 }
 
+/* Image strip at top of each card */
+.experience-card__image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--surface-1);
+}
+
+.experience-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: brightness(0.75) saturate(0.8);
+}
+
+.experience-card:hover .experience-card__image img {
+  transform: scale(1.04);
+}
+
+/* Gold tick indicator on selected */
+.experience-card__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(201, 162, 39, 0);
+  transition: background 0.25s ease;
+}
+
+.experience-card input[type="radio"]:checked ~ .experience-card__content .experience-card__image::after {
+  background: rgba(201, 162, 39, 0.08);
+}
+
+/* Selection marker */
+.experience-card__marker {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(243, 235, 221, 0.3);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  z-index: 2;
+}
+
+.experience-card__marker::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.experience-card input[type="radio"]:checked + .experience-card__content .experience-card__marker {
+  border-color: var(--gold);
+  background: var(--gold);
+}
+
+.experience-card input[type="radio"]:checked + .experience-card__content .experience-card__marker::after {
+  background: var(--bg);
+}
+
+/* Text area */
+.experience-card__text {
+  padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+}
+
 .experience-card__title {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
   color: var(--ivory);
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 0.35rem;
   font-weight: 400;
+  line-height: 1.2;
 }
 
 .experience-card__desc {
   font-size: var(--text-sm);
   color: var(--muted);
+  line-height: 1.6;
 }
 
 /* ═══════════════════════════════════════════════════════

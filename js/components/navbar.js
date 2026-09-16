@@ -16,17 +16,18 @@ function renderNavbar() {
         <ul class="navbar-nav" role="list">
           <li><a href="collection.html">Collection</a></li>
           <li><a href="heritage.html">Heritage</a></li>
+          <li><a href="atelier.html">Atelier</a></li>
           <li><a href="track.html">Track Order</a></li>
         </ul>
 
         <div class="nav-actions">
           <a href="wishlist.html" aria-label="Wishlist">
             Wishlist
-            <span id="nav-wishlist-badge" class="badge" aria-live="polite">0</span>
+            <span id="nav-wishlist-badge" class="badge" aria-live="polite" style="display:none">0</span>
           </a>
           <a href="cart.html" aria-label="Cart">
             Cart
-            <span id="nav-cart-badge" class="badge" aria-live="polite">0</span>
+            <span id="nav-cart-badge" class="badge" aria-live="polite" style="display:none">0</span>
           </a>
           <button
             class="nav-burger"
@@ -47,6 +48,7 @@ function renderNavbar() {
     <div class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
       <a href="collection.html">Collection</a>
       <a href="heritage.html">Heritage</a>
+      <a href="atelier.html">Atelier</a>
       <a href="track.html">Track Order</a>
       <a href="wishlist.html">Wishlist</a>
       <a href="cart.html">Cart</a>
@@ -129,10 +131,13 @@ function updateNavBadges() {
     const cart  = window.cartAPI.getCart();
     const count = cart.reduce((acc, item) => acc + item.quantity, 0);
     cartBadge.textContent = count;
+    cartBadge.style.display = count > 0 ? 'inline-flex' : 'none';
   }
 
   if (wishlistBadge && window.wishlistAPI) {
-    wishlistBadge.textContent = window.wishlistAPI.getWishlist().length;
+    const count = window.wishlistAPI.getWishlist().length;
+    wishlistBadge.textContent = count;
+    wishlistBadge.style.display = count > 0 ? 'inline-flex' : 'none';
   }
 }
 

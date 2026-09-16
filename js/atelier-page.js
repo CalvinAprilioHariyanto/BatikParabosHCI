@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Validate Step 1 (Experience selected)
     const experienceChecked = form.querySelector('input[name="experience"]:checked');
     if (!experienceChecked) {
-      window.toast && window.toast.show("Please select an experience.", "error");
+      if (window.showToast) window.showToast("Please select an experience.", "error");
       return;
     }
     showStep(step2);
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (!isValid) {
-      window.toast && window.toast.show("Please complete all required fields correctly.", "error");
+      if (window.showToast) window.showToast("Please complete all required fields correctly.", "error");
       return;
     }
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showConfirmation(savedAppointment);
     } catch (error) {
       console.error(error);
-      window.toast && window.toast.show("An error occurred while submitting.", "error");
+      if (window.showToast) window.showToast("An error occurred while submitting.", "error");
       btnSubmit.disabled = false;
       btnSubmit.textContent = "Request Reservation";
     }

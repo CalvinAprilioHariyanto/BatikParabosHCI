@@ -2,6 +2,7 @@
   /* ── Brand Palette ─────────────────────────────── */
   --bg:           #070707;
   --surface:      #111111;
+  --surface-1:    #111111;
   --surface-2:    #161412;
   --gold:         #C9A227;
   --gold-dim:     #8F741A;
@@ -23,6 +24,7 @@
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
+  --text-md:   1.0625rem;
   --text-lg:   1.25rem;
   --text-xl:   1.5rem;
   --text-2xl:  2rem;
@@ -38,10 +40,13 @@
   --spacing-lg:  2rem;
   --spacing-xl:  4rem;
   --spacing-xxl: 8rem;
+  --spacing-xxxl: 12rem;
 
   /* ── Transitions ─────────────────────────────────── */
-  --transition:      all 0.3s ease;
-  --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition:        all 0.3s ease;
+  --transition-fast:   all 0.18s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow:   all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   /* ── Layout ──────────────────────────────────────── */
   --navbar-h: 72px;

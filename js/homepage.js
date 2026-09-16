@@ -1,6 +1,7 @@
 /* ─────────────────────────────────────────────────────────
    homepage.js  —  Homepage interactions
-   Lightweight scroll-driven effects. No external libraries.
+   Scroll-driven craft animation + standard page behaviors.
+   No external libraries. Vanilla JS only.
 ───────────────────────────────────────────────────────── */
 
 (function () {
@@ -31,7 +32,7 @@
         }
       });
     }, {
-      threshold: 0.12,
+      threshold: 0.1,
       rootMargin: '0px 0px -40px 0px'
     });
 
@@ -39,14 +40,12 @@
   }
 
   /* ─────────────────────────────────────────────────────
-     2. PARALLAX — Hero image layer
-     translateY relative to scroll position, capped for
-     performance. Uses requestAnimationFrame batching.
+     2. PARALLAX — Hero + Immersive
   ───────────────────────────────────────────────────── */
   function initParallax() {
     if (prefersReduced) return;
 
-    const heroFrame = document.querySelector('.hero__image-frame');
+    const heroFrame   = document.querySelector('.hero__image-frame');
     const immersiveBg = document.querySelector('.immersive__bg-layer');
 
     if (!heroFrame && !immersiveBg) return;
@@ -57,18 +56,28 @@
       const scrollY = window.scrollY;
 
       if (heroFrame) {
-        const heroH = heroFrame.parentElement.offsetHeight;
+        const heroH   = heroFrame.parentElement.offsetHeight;
         const progress = Math.min(scrollY / heroH, 1);
-        heroFrame.style.transform = `translateY(${progress * 80}px)`;
+        
+        // Slightly move down the image/video to create parallax
+        heroFrame.style.transform = `translateY(${progress * 25}%)`;
       }
 
       if (immersiveBg) {
-        const rect = immersiveBg.parentElement.getBoundingClientRect();
-        const offset = -rect.top * 0.25;
+        const rect   = immersiveBg.parentElement.getBoundingClientRect();
+        const offset = -rect.top * 0.22;
         immersiveBg.style.transform = `translateY(${offset}px)`;
       }
 
       ticking = false;
+    }
+
+    // Fallback handling for video
+    const heroVideo = document.querySelector('.hero__video');
+    if (heroVideo) {
+      heroVideo.addEventListener('error', () => {
+        heroVideo.style.display = 'none'; // Fallback to image
+      });
     }
 
     window.addEventListener('scroll', () => {
@@ -80,55 +89,169 @@
   }
 
   /* ─────────────────────────────────────────────────────
-     3. HERO IMAGE SCALE IN
-     Once loaded, animate hero image from scale(1.06) → 1
+     3. HERO IMAGE/VIDEO SCALE IN
   ───────────────────────────────────────────────────── */
   function initHeroImageScale() {
     if (prefersReduced) return;
-    const heroImg = document.querySelector('.hero__image-frame img');
-    if (!heroImg) return;
+    const heroMediaEls = document.querySelectorAll('.hero__media');
+    if (!heroMediaEls.length) return;
 
-    // Image already loaded
-    if (heroImg.complete) {
-      heroImg.style.transform = 'scale(1)';
-    } else {
-      heroImg.addEventListener('load', () => {
-        heroImg.style.transform = 'scale(1)';
-      });
-    }
+    heroMediaEls.forEach(media => {
+      // For images
+      if (media.tagName.toLowerCase() === 'img') {
+        if (media.complete) {
+          media.style.transform = 'scale(1)';
+        } else {
+          media.addEventListener('load', () => {
+            media.style.transform = 'scale(1)';
+          });
+        }
+      } 
+      // For videos
+      else if (media.tagName.toLowerCase() === 'video') {
+        if (media.readyState >= 3) {
+          media.style.transform = 'scale(1)';
+        } else {
+          media.addEventListener('canplay', () => {
+            media.style.transform = 'scale(1)';
+          });
+        }
+      }
+    });
   }
 
   /* ─────────────────────────────────────────────────────
-     4. COLLECTION PREVIEW — render from central data
-     Pulls featured products from window.parabosProducts,
-     renders product cards into #collection-preview-grid.
-     Does NOT create its own product array.
+     4. HERO SMOOTH SCROLL — "Explore the Craft" anchor
+  ───────────────────────────────────────────────────── */
+  function initHeroScrollTo() {
+    const btn = document.querySelector('.hero__scroll-to');
+    if (!btn) return;
+    btn.addEventListener('click', (e) => {
+      const target = document.getElementById('craft-story');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  /* ─────────────────────────────────────────────────────
+     5. CRAFT STORY — Scroll-driven process animation
+     
+     The scroll zone has:
+       - A sticky left panel (.craft-story__sticky-panel)
+       - Scrollable right stages (.craft-story__stages)
+     
+     As the user scrolls through the stages on the right,
+     we track which stage is "in view" and:
+       1. Activate the corresponding cloth layer
+       2. Highlight the stage step on the right
+       3. Update the progress bar
+  ───────────────────────────────────────────────────── */
+  function initCraftStory() {
+    const scrollZone  = document.getElementById('craft-scroll-zone');
+    const stages      = document.querySelectorAll('.craft-stage');
+    const layers      = document.querySelectorAll('.craft-layer');
+    const progressFill = document.getElementById('craft-progress-fill');
+    const progressSteps = document.querySelectorAll('.craft-progress-step');
+
+    if (!scrollZone || !stages.length || !layers.length) return;
+
+    let currentStage = -1;
+
+    // On reduced motion — show all visible, no transitions
+    if (prefersReduced) {
+      stages.forEach(s => s.classList.add('is-current'));
+      layers[layers.length - 1]?.classList.add('is-active');
+      return;
+    }
+
+    // Activate initial state (stage 0)
+    function activateStage(idx) {
+      if (idx === currentStage) return;
+      currentStage = idx;
+
+      // Layers
+      layers.forEach((layer, i) => {
+        layer.classList.toggle('is-active', i === idx);
+      });
+
+      // Stages
+      stages.forEach((stage, i) => {
+        stage.classList.toggle('is-current', i === idx);
+      });
+
+      // Progress bar
+      if (progressFill) {
+        const pct = stages.length > 1
+          ? (idx / (stages.length - 1)) * 100
+          : 100;
+        progressFill.style.width = `${pct}%`;
+      }
+
+      // Progress step dots
+      progressSteps.forEach((step, i) => {
+        step.classList.toggle('is-active', i <= idx);
+      });
+    }
+
+    // Intersection Observer per stage
+    const stageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = parseInt(entry.target.dataset.stage, 10);
+          if (!isNaN(idx)) activateStage(idx);
+        }
+      });
+    }, {
+      threshold: 0.5,
+      rootMargin: '0px 0px -20% 0px'
+    });
+
+    stages.forEach(stage => stageObserver.observe(stage));
+
+    // Activate stage 0 immediately on load if zone is visible
+    activateStage(0);
+  }
+
+  /* ─────────────────────────────────────────────────────
+     6. COLLECTION PREVIEW — render from central data
   ───────────────────────────────────────────────────── */
   function initCollectionPreview() {
     const grid = document.getElementById('collection-preview-grid');
     if (!grid || !window.parabosProducts) return;
 
-    const featured = window.parabosProducts.filter(p => p.featured).slice(0, 3);
+    // Prefer featured products; fallback to first 3
+    let featured = window.parabosProducts.filter(p => p.featured).slice(0, 3);
+    if (featured.length === 0) {
+      featured = window.parabosProducts.slice(0, 3);
+    }
 
     if (featured.length === 0) {
-      grid.closest('.collection-preview').style.display = 'none';
+      grid.closest('.collection-preview')?.style && (grid.closest('.collection-preview').style.display = 'none');
       return;
     }
 
+    const formatPrice = window.formatRupiah
+      ? window.formatRupiah
+      : (val) => `Rp ${val.toLocaleString('id-ID')}`;
+
     featured.forEach((product, i) => {
-      const price = window.formatRupiah
-        ? window.formatRupiah(product.price)
-        : `Rp ${product.price.toLocaleString('id-ID')}`;
+      const price    = formatPrice(product.price);
+      const imgSrc   = (product.images && product.images.length > 0)
+        ? product.images[0]
+        : 'assets/images/tes.jpg';
 
       const card = document.createElement('article');
       card.className = `product-card reveal reveal--delay-${i + 1}`;
       card.setAttribute('role', 'listitem');
+
       card.innerHTML = `
         <a href="product.html?id=${product.id}" class="product-card__link" aria-label="View ${product.name}">
           <div class="product-card__image-wrap">
             <img
-              src="${product.images[0]}"
-              alt="${product.name} — ${product.motif} motif"
+              src="${imgSrc}"
+              alt="${product.name} — ${product.motif || product.category} motif"
               loading="lazy"
               width="600"
               height="800"
@@ -143,7 +266,7 @@
           <div class="product-card__body">
             <span class="product-card__category">${product.category}</span>
             <h3 class="product-card__name">${product.name}</h3>
-            <p class="product-card__motif">${product.motif} · ${product.material}</p>
+            ${product.motif ? `<p class="product-card__motif">${product.motif} · ${product.material}</p>` : ''}
             <p class="product-card__price">${price}</p>
           </div>
         </a>
@@ -156,7 +279,7 @@
   }
 
   /* ─────────────────────────────────────────────────────
-     5. MARQUEE — pause on hover
+     7. MARQUEE — pause on hover
   ───────────────────────────────────────────────────── */
   function initMarquee() {
     const track = document.querySelector('.marquee-track');
@@ -172,6 +295,8 @@
     initReveal();
     initParallax();
     initHeroImageScale();
+    initHeroScrollTo();
+    initCraftStory();
     initCollectionPreview();
     initMarquee();
   });

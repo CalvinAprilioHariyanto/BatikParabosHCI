@@ -273,13 +273,34 @@
 }
 
 .size-assistant-btn {
-  font-size: 0.7rem;
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.size-assistant-btn:hover {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--ivory);
+  background-color: var(--bg);
+  border: 1px solid var(--line);
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.size-assistant-btn:hover,
+.size-assistant-btn:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  background-color: transparent;
+  outline: none;
+}
+
+/* Block-level button utility */
+.btn-block {
+  width: 100%;
+  display: block;
+  text-align: center;
 }
 
 .product-size__options {
@@ -375,19 +396,48 @@
 }
 
 .icon-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  font-size: var(--text-xs);
-  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
+  background-color: transparent;
+  border: 1px solid rgba(201, 162, 39, 0.4); /* Muted gold border */
+  height: 48px;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1 1 auto; /* Allows natural responsive wrapping */
+  min-width: max-content;
 }
-.icon-btn:hover {
-  color: var(--ivory);
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: color 0.3s ease;
 }
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+  background-color: rgba(201, 162, 39, 0.05);
+  outline: none;
+}
+
+.icon-btn:active {
+  transform: translateY(1px);
+  background-color: rgba(201, 162, 39, 0.1);
+}
+
 .icon-btn.is-active {
   color: var(--gold);
+  border-color: var(--gold);
+  background-color: rgba(201, 162, 39, 0.05);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -503,30 +553,47 @@ dialog::backdrop {
   object-fit: contain;
 }
 
-/* Simulation Modals */
+/* Simulation Modals - Side Drawer (Premium UI) */
 .simulation-modal {
-  max-width: 500px;
-  border: 1px solid var(--line);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  margin: 0;
+  margin-left: auto; /* Push to the right */
+  height: 100vh;
+  max-height: 100vh;
+  width: 460px;
+  max-width: 100%;
+  background: var(--surface-2);
+  border: none;
+  border-left: 1px solid var(--line);
+  box-shadow: -20px 0 60px rgba(0,0,0,0.8);
+  /* Slide in animation */
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: flex;
+  flex-direction: column;
 }
 
-.simulation-modal__close {
-  position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  font-size: 1.5rem;
-  cursor: pointer;
+.simulation-modal[open] {
+  transform: translateX(0);
 }
-.simulation-modal__close:hover {
-  color: var(--ivory);
+
+.simulation-modal::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.simulation-modal[open]::backdrop {
+  opacity: 1;
 }
 
 .simulation-modal__header {
-  padding: var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
   border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .simulation-modal__header h2 {
@@ -536,55 +603,169 @@ dialog::backdrop {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.badge-subtle {
+  font-family: var(--font-body);
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+  padding: 0.15rem 0.4rem;
+}
+
+.simulation-modal__close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-right: -0.5rem;
+  transition: color var(--transition-fast);
+}
+
+.simulation-modal__close:hover {
+  color: var(--ivory);
 }
 
 .simulation-modal__body {
   padding: var(--spacing-xl);
+  flex: 1;
+  overflow-y: auto;
 }
 
 .simulation-desc {
   font-size: var(--text-sm);
   color: var(--muted);
-  margin-bottom: var(--spacing-xl);
-  line-height: 1.6;
+  margin-bottom: var(--spacing-xxl);
+  line-height: 1.8;
 }
 
-/* Forms in modal */
+/* Forms in drawer */
 .form-group {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
 .form-group label {
   display: block;
-  font-size: var(--text-xs);
-  letter-spacing: 0.1em;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: var(--spacing-sm);
+  color: var(--ivory);
+  margin-bottom: var(--spacing-md);
 }
 
 .sim-select {
   width: 100%;
-  padding: var(--spacing-md);
-  background: var(--surface-1);
+  padding: 1rem;
+  background: var(--bg);
   border: 1px solid var(--line);
   color: var(--ivory);
   font-family: var(--font-body);
+  font-size: var(--text-sm);
+  transition: border-color var(--transition-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C9A227' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
 }
 
-.sim-result {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-lg);
-  background: rgba(201, 162, 39, 0.05);
-  border: 1px solid rgba(201, 162, 39, 0.2);
+.sim-select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.sim-action-btn {
+  margin-top: var(--spacing-lg);
+}
+
+/* Simulated Analysis State */
+.sim-analysis {
+  margin-top: var(--spacing-xxl);
+  padding: var(--spacing-xl);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.sim-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.sim-analysis-text {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+
+/* Result Card */
+.sim-result {
+  margin-top: var(--spacing-xxl);
+  padding: var(--spacing-xl);
+  background: var(--surface-1);
+  border-top: 2px solid var(--gold);
+  text-align: center;
+}
+
+.sim-result-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--spacing-md);
 }
 
 .sim-result h3 {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  color: var(--gold);
-  margin: var(--spacing-sm) 0 var(--spacing-md);
+  font-size: clamp(3rem, 5vw, 4rem);
+  color: var(--ivory);
+  margin: 0 0 var(--spacing-sm) 0;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.sim-result-desc {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin-bottom: var(--spacing-xl);
+}
+
+.sim-apply-btn {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sim-result-disclaimer {
+  font-size: 0.6rem;
+  color: var(--muted-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .simulation-modal {
+    width: 100vw;
+  }
 }
 
 /* Virtual Fitting Specific */

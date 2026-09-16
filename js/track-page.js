@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (order.items && order.items.length > 0) {
       order.items.forEach(item => {
-        const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/placeholder.svg';
+        const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/tes.jpg';
         const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
         const lineTotal = item.price * item.quantity;
 

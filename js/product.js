@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return; // Stop execution
   }
 
+  // Product found — show container
+  productContainer.classList.remove('hidden');
+
   // State
   let selectedSize = null;
   const hasSizes = product.sizes && product.sizes.length > 0;
@@ -246,8 +249,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Size Assistant
     const btnSizeAssistant = document.getElementById('open-size-assistant');
     const modalSize = document.getElementById('size-modal');
-    if (btnSizeAssistant) {
+    if (btnSizeAssistant && modalSize) {
       btnSizeAssistant.addEventListener('click', () => {
+        // Reset state on open
+        if (calcBtn) calcBtn.style.display = 'block';
+        if (calcBtn) calcBtn.textContent = 'Find My Size';
+        if (simResult) simResult.classList.add('hidden');
+        if (simAnalysis) simAnalysis.classList.add('hidden');
         modalSize.showModal();
       });
     }
@@ -255,6 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Size Calculation Simulation
     const calcBtn = document.getElementById('sim-calculate-btn');
     const simResult = document.getElementById('sim-result');
+    const simAnalysis = document.getElementById('sim-analysis');
+    const simAnalysisText = document.querySelector('.sim-analysis-text');
     const suggestedSizeEl = document.getElementById('sim-suggested-size');
     const applySizeBtn = document.getElementById('sim-apply-size');
 
@@ -279,7 +289,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         suggestedSizeEl.textContent = suggested;
-        simResult.classList.remove('hidden');
+        
+        // Hide button, show analysis state
+        calcBtn.style.display = 'none';
+        simResult.classList.add('hidden');
+        simAnalysis.classList.remove('hidden');
+        
+        // Sequence text updates
+        const steps = [
+          "Reading preferences...",
+          "Comparing proportions...",
+          "Checking available sizes...",
+          "Preparing recommendation..."
+        ];
+        
+        let step = 0;
+        simAnalysisText.textContent = steps[0];
+        
+        const interval = setInterval(() => {
+          step++;
+          if (step < steps.length) {
+            simAnalysisText.textContent = steps[step];
+          }
+        }, 400);
+
+        // Finish analysis
+        setTimeout(() => {
+          clearInterval(interval);
+          simAnalysis.classList.add('hidden');
+          simResult.classList.remove('hidden');
+          calcBtn.style.display = 'block';
+          calcBtn.textContent = 'Recalculate';
+        }, 1800);
       });
     }
 
@@ -302,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalFitting = document.getElementById('fitting-modal');
     const fittingGarment = document.getElementById('fitting-garment');
     
-    if (btnFitting) {
+    if (btnFitting && modalFitting) {
       btnFitting.addEventListener('click', () => {
         if (product.images && product.images.length > 0) {
           fittingGarment.src = product.images[0];
@@ -310,6 +351,28 @@ document.addEventListener('DOMContentLoaded', () => {
         modalFitting.showModal();
       });
     }
+
+    // Generic Modal Close Handlers
+    const closeBtns = document.querySelectorAll('.simulation-modal__close, .zoom-modal__close');
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const dialog = e.target.closest('dialog');
+        if (dialog) dialog.close();
+      });
+    });
+    
+    // Close on backdrop click (for natively supported dialogs)
+    const dialogs = document.querySelectorAll('dialog');
+    dialogs.forEach(dialog => {
+      dialog.addEventListener('click', (e) => {
+        const rect = dialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                            rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+          dialog.close();
+        }
+      });
+    });
   }
 
 });

@@ -29,11 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     filteredProducts.sort((a, b) => {
       if (currentSort === 'price-asc') return a.price - b.price;
       if (currentSort === 'price-desc') return b.price - a.price;
-      // Default / Featured: featured items first
       if (currentSort === 'featured') {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
-        return 0; // maintain original order for non-featured
+        return 0;
       }
       return 0;
     });
@@ -48,50 +47,72 @@ document.addEventListener('DOMContentLoaded', () => {
       emptyState.classList.add('hidden');
       
       filteredProducts.forEach(product => {
-        const formatPrice = typeof window.formatCurrency === 'function' 
-          ? window.formatCurrency(product.price)
-          : `IDR ${product.price.toLocaleString()}`;
-          
-        const cardHTML = `
-          <div class="product-card reveal">
-            <a href="product.html?id=${product.id}" class="product-card__image-link">
-              <div class="product-card__image-wrap">
-                <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
+        // Use correct price formatter
+        const price = typeof window.formatRupiah === 'function'
+          ? window.formatRupiah(product.price)
+          : `IDR ${product.price.toLocaleString('id-ID')}`;
+        
+        const isWishlisted = window.wishlistAPI ? window.wishlistAPI.isWishlisted(product.id) : false;
+        
+        const card = document.createElement('article');
+        card.className = 'product-card reveal';
+        card.innerHTML = `
+          <a href="product.html?id=${product.id}" class="product-card__link" aria-label="View ${product.name}">
+            <div class="product-card__image-wrap">
+              <img
+                src="${product.images[0]}"
+                alt="${product.name} — ${product.motif || product.category} motif"
+                loading="lazy"
+              >
+              ${product.type === 'custom' ? '<span class="product-card__type-badge">Bespoke</span>' : ''}
+              <div class="product-card__overlay">
+                <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">View Piece</span>
               </div>
-            </a>
-            <div class="product-card__info">
-              <div class="product-card__meta">
-                <span class="product-card__category">${product.category}</span>
-                <button class="btn-icon wishlist-toggle" data-id="${product.id}" aria-label="Add to wishlist">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </svg>
-                </button>
-              </div>
-              <h3 class="product-card__title">
-                <a href="product.html?id=${product.id}">${product.name}</a>
-              </h3>
-              <p class="product-card__price">${formatPrice}</p>
             </div>
-          </div>
+            <div class="product-card__body">
+              <span class="product-card__category">${product.category}</span>
+              <h3 class="product-card__name">${product.name}</h3>
+              <p class="product-card__motif">${product.motif} · ${product.material}</p>
+              <p class="product-card__price">${price}</p>
+            </div>
+          </a>
+          <button
+            class="product-card__wishlist-btn${isWishlisted ? ' is-active' : ''}"
+            data-id="${product.id}"
+            aria-label="${isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}"
+            aria-pressed="${isWishlisted}"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="${isWishlisted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </button>
         `;
-        productGrid.insertAdjacentHTML('beforeend', cardHTML);
+        
+        productGrid.appendChild(card);
       });
 
-      // Bind wishlist events
-      const wishlistBtns = productGrid.querySelectorAll('.wishlist-toggle');
-      wishlistBtns.forEach(btn => {
-        const id = btn.getAttribute('data-id');
-        // Initial state
-        if (window.Wishlist && window.Wishlist.isInWishlist(id)) {
-          btn.classList.add('is-active');
-        }
-        
+      // Bind wishlist toggle events
+      productGrid.querySelectorAll('.product-card__wishlist-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          e.preventDefault(); // Prevent navigating if wrapped in a link somehow
-          if (window.Wishlist) {
-            window.Wishlist.toggle(id);
-            btn.classList.toggle('is-active');
+          e.preventDefault();
+          e.stopPropagation();
+          if (!window.wishlistAPI) return;
+          
+          const id = btn.getAttribute('data-id');
+          const wasListed = window.wishlistAPI.isWishlisted(id);
+          
+          if (wasListed) {
+            window.wishlistAPI.removeFromWishlist(id);
+            btn.classList.remove('is-active');
+            btn.setAttribute('aria-pressed', 'false');
+            btn.setAttribute('aria-label', 'Add to wishlist');
+            btn.querySelector('svg').setAttribute('fill', 'none');
+          } else {
+            window.wishlistAPI.addToWishlist(id);
+            btn.classList.add('is-active');
+            btn.setAttribute('aria-pressed', 'true');
+            btn.setAttribute('aria-label', 'Remove from wishlist');
+            btn.querySelector('svg').setAttribute('fill', 'currentColor');
           }
         });
       });
@@ -105,7 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // § 2. CATEGORY FILTERS
   // ═══════════════════════════════════════════════════════
   function initFilters() {
-    // Get unique categories
+    // Handle URL param for category (from footer links)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+    if (urlCategory) {
+      currentCategory = urlCategory;
+    }
+
     const categories = [...new Set(products.map(p => p.category))];
     
     categories.forEach(cat => {
@@ -123,10 +150,23 @@ document.addEventListener('DOMContentLoaded', () => {
       categoryFilters.appendChild(li);
     });
 
-    // Event listener for filters
+    // Set initial active state
+    const allFilterBtns = categoryFilters.querySelectorAll('.filter-btn');
+    allFilterBtns.forEach(b => {
+      if (b.getAttribute('data-category') === currentCategory) {
+        b.classList.add('is-active');
+        b.setAttribute('aria-selected', 'true');
+      }
+    });
+    const allBtn = categoryFilters.querySelector('[data-category="all"]');
+    if (currentCategory === 'all' && allBtn) {
+      allBtn.classList.add('is-active');
+      allBtn.setAttribute('aria-selected', 'true');
+    }
+
+    // Event listener
     categoryFilters.addEventListener('click', (e) => {
       if (e.target.classList.contains('filter-btn')) {
-        // Update active state
         const allBtns = categoryFilters.querySelectorAll('.filter-btn');
         allBtns.forEach(b => {
           b.classList.remove('is-active');
@@ -155,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════════
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      // Reset filter button states
       const allBtns = categoryFilters.querySelectorAll('.filter-btn');
       allBtns.forEach(b => {
         b.classList.remove('is-active');
@@ -174,11 +213,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══════════════════════════════════════════════════════
-  // § 5. SCROLL REVEAL (Re-use from global or define simple one)
+  // § 5. SCROLL REVEAL
   // ═══════════════════════════════════════════════════════
   function initScrollReveal() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
 
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -187,12 +229,10 @@ document.addEventListener('DOMContentLoaded', () => {
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
 
-    const revealElements = document.querySelectorAll('.reveal:not(.is-visible)');
-    revealElements.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => observer.observe(el));
   }
   
-  // Run once on load for static elements (header, controls)
   initScrollReveal();
 });
