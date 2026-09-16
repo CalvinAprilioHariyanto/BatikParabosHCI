@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════════════════════
+   HERITAGE PAGE STYLES
+═══════════════════════════════════════════════════════ */
+
+.heritage-page {
+  padding-top: calc(var(--navbar-h) + var(--spacing-xl));
+  background-color: var(--bg);
+}
+
+.section-spacing {
+  padding: var(--spacing-xxxl) 0;
+}
+
+/* Common Typography */
+.heritage-section-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: var(--spacing-md);
+}
+
+.heritage-section-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto var(--spacing-xl) auto;
+}
+
+.heritage-paragraph {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  color: var(--ivory);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 300;
+}
+
+.heritage-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   § HERO SECTION
+═══════════════════════════════════════════════════════ */
+.heritage-hero {
+  position: relative;
+  padding: var(--spacing-xxxl) 0 var(--spacing-xxl) 0;
+  text-align: center;
+}
+
+.heritage-hero__container {
+  max-width: 800px;
+  margin: 0 auto var(--spacing-xxl) auto;
+}
+
+.heritage-hero__subtitle {
+  display: block;
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-md);
+}
+
+.heritage-hero__title {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-4xl), 8vw, 5rem);
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.1;
+}
+
+.heritage-hero__desc {
+  font-size: var(--text-lg);
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.heritage-hero__image-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.heritage-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: var(--surface-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § STORY SECTION
+═══════════════════════════════════════════════════════ */
+.heritage-story {
+  border-top: 1px solid var(--line);
+}
+
+.heritage-story__container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   § CRAFTSMANSHIP GRID
+═══════════════════════════════════════════════════════ */
+.craft-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xxl);
+  margin-top: var(--spacing-xxl);
+}
+
+@media (min-width: 768px) {
+  .craft-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.craft-block {
+  text-align: left;
+}
+
+.craft-block__image-wrapper {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+  background-color: var(--surface-1);
+}
+
+.craft-block__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.craft-block__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--ivory);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 300;
+}
+
+.craft-block__desc {
+  color: var(--muted);
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   § PROCESS SEQUENCE
+═══════════════════════════════════════════════════════ */
+.heritage-process {
+  background-color: var(--surface-1);
+}
+
+.process-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxl);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-xxl);
+  border-bottom: 1px solid var(--line);
+}
+
+.process-step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .process-step {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-xxxl);
+  }
+}
+
+.process-step__number {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  color: var(--gold);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.process-step__content {
+  flex: 1;
+}
+
+.process-step__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--ivory);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 300;
+}
+
+.process-step__desc {
+  color: var(--muted);
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   § ATELIER CTA
+═══════════════════════════════════════════════════════ */
+.heritage-atelier {
+  border-top: 1px solid var(--gold);
+}
+
+.heritage-atelier__container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.heritage-atelier__desc {
+  color: var(--muted);
+  font-size: var(--text-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § ANIMATION HELPER (OPTIONAL)
+═══════════════════════════════════════════════════════ */
+/* Elements start hidden, and JS will add a class to trigger the transition */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

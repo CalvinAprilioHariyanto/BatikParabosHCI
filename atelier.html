@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Visit the Atelier — Batik Parabos</title>
+  <meta name="description" content="Experience the collection beyond the screen. Request a private visit.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/atelier.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="atelier-page">
+    
+    <!-- HERO SECTION -->
+    <section class="atelier-hero">
+      <div class="container atelier-hero__container">
+        <h1 class="atelier-hero__title">Visit the Atelier</h1>
+        <p class="atelier-hero__desc">Experience the collection beyond the screen.</p>
+      </div>
+      <div class="atelier-hero__image-wrapper">
+        <img src="assets/images/placeholder.svg" alt="The Batik Parabos Atelier" class="atelier-hero__image">
+      </div>
+    </section>
+
+    <!-- INTRODUCTION -->
+    <section class="atelier-intro section-spacing">
+      <div class="container atelier-intro__container">
+        <p class="atelier-intro__text">
+          A physical extension of our digital philosophy. We invite you to discover the craftsmanship, 
+          texture, and weight of our pieces in person. Our private consultations are designed to provide 
+          a dedicated space to explore the collection, discuss bespoke possibilities, and understand the 
+          process behind the textile.
+        </p>
+      </div>
+    </section>
+
+    <!-- RESERVATION FLOW CONTAINER -->
+    <section class="reservation-flow section-spacing" id="reservation-section">
+      <div class="container reservation__container">
+        
+        <!-- DYNAMIC FORM STATE -->
+        <div id="reservation-form-state">
+          <form id="atelier-reservation-form" novalidate>
+            
+            <!-- STEP 1: EXPERIENCE OPTIONS -->
+            <div id="step-1" class="form-step active">
+              <h2 class="form-step__title">1. Select Experience</h2>
+              <div class="experience-options">
+                
+                <label class="experience-card" for="exp-private">
+                  <input type="radio" name="experience" id="exp-private" value="Private Atelier Visit" required>
+                  <div class="experience-card__content">
+                    <h3 class="experience-card__title">Private Atelier Visit</h3>
+                    <p class="experience-card__desc">A curated visit to explore the collection and atelier atmosphere.</p>
+                  </div>
+                </label>
+
+                <label class="experience-card" for="exp-craft">
+                  <input type="radio" name="experience" id="exp-craft" value="Craft Experience" required>
+                  <div class="experience-card__content">
+                    <h3 class="experience-card__title">Craft Experience</h3>
+                    <p class="experience-card__desc">An introduction to the craftsmanship and details behind the pieces.</p>
+                  </div>
+                </label>
+
+                <label class="experience-card" for="exp-bespoke">
+                  <input type="radio" name="experience" id="exp-bespoke" value="Bespoke Consultation" required>
+                  <div class="experience-card__content">
+                    <h3 class="experience-card__title">Bespoke Consultation</h3>
+                    <p class="experience-card__desc">A personal discussion around preferences and bespoke possibilities.</p>
+                  </div>
+                </label>
+
+                <label class="experience-card" for="exp-collection">
+                  <input type="radio" name="experience" id="exp-collection" value="Collection Viewing" required>
+                  <div class="experience-card__content">
+                    <h3 class="experience-card__title">Collection Viewing</h3>
+                    <p class="experience-card__desc">A focused opportunity to explore selected pieces.</p>
+                  </div>
+                </label>
+
+              </div>
+              <div class="form-actions text-right">
+                <button type="button" class="btn btn-primary" id="btn-next-1">Continue to Details</button>
+              </div>
+            </div>
+
+            <!-- STEP 2: DETAILS -->
+            <div id="step-2" class="form-step hidden">
+              <h2 class="form-step__title">2. Reservation Details</h2>
+              
+              <div class="form-row form-row--multi">
+                <div class="form-group">
+                  <label for="res-date">Date</label>
+                  <input type="date" id="res-date" name="date" required>
+                </div>
+                <div class="form-group">
+                  <label for="res-time">Time</label>
+                  <select id="res-time" name="time" required>
+                    <option value="" disabled selected>Select a time</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="res-guests">Guests</label>
+                  <select id="res-guests" name="guests" required>
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+                </div>
+              </div>
+
+              <h3 class="form-step__subtitle mt-xl">Contact Information</h3>
+              <div class="form-group">
+                <label for="res-name">Full Name</label>
+                <input type="text" id="res-name" name="name" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-row form-row--multi">
+                <div class="form-group">
+                  <label for="res-email">Email</label>
+                  <input type="email" id="res-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                  <label for="res-phone">Phone Number</label>
+                  <input type="tel" id="res-phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+              </div>
+
+              <div class="form-actions space-between mt-xl">
+                <button type="button" class="btn btn-secondary" id="btn-back-2">Back</button>
+                <button type="button" class="btn btn-primary" id="btn-next-2">Review Reservation</button>
+              </div>
+            </div>
+
+            <!-- STEP 3: REVIEW -->
+            <div id="step-3" class="form-step hidden">
+              <h2 class="form-step__title">3. Review Reservation</h2>
+              
+              <div class="review-box">
+                <div class="review-section">
+                  <h4 class="review-section__title">Experience</h4>
+                  <p id="review-experience" class="review-val"></p>
+                  <p class="review-val"><span id="review-date"></span> at <span id="review-time"></span></p>
+                  <p class="review-val"><span id="review-guests"></span> Guest(s)</p>
+                </div>
+
+                <div class="review-section">
+                  <h4 class="review-section__title">Contact</h4>
+                  <p id="review-name" class="review-val"></p>
+                  <p id="review-email" class="review-val"></p>
+                  <p id="review-phone" class="review-val"></p>
+                </div>
+              </div>
+
+              <div class="form-actions space-between mt-xl">
+                <button type="button" class="btn btn-secondary" id="btn-back-3">Back to Details</button>
+                <button type="submit" class="btn btn-primary" id="btn-submit">Request Reservation</button>
+              </div>
+            </div>
+
+          </form>
+        </div> <!-- End Form State -->
+
+        <!-- CONFIRMATION STATE -->
+        <div id="reservation-confirmation-state" class="hidden">
+          <div class="confirmation-box text-center">
+            <h2 class="confirmation__title">Reservation Request Received</h2>
+            <p class="confirmation__desc">Your reservation request has been recorded. This frontend experience does not represent a live availability confirmation.</p>
+            
+            <div class="confirmation-details text-left">
+              <div class="conf-row">
+                <span class="conf-label">Reservation ID</span>
+                <span class="conf-val highlight" id="conf-id"></span>
+              </div>
+              <div class="conf-row">
+                <span class="conf-label">Status</span>
+                <span class="conf-val status-requested">REQUESTED</span>
+              </div>
+              <div class="conf-row">
+                <span class="conf-label">Experience</span>
+                <span class="conf-val" id="conf-exp"></span>
+              </div>
+              <div class="conf-row">
+                <span class="conf-label">Date & Time</span>
+                <span class="conf-val"><span id="conf-date"></span>, <span id="conf-time"></span></span>
+              </div>
+            </div>
+
+            <div class="confirmation-actions mt-xl">
+              <a href="heritage.html" class="btn btn-secondary">Return to Heritage</a>
+              <a href="index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <!-- Page specific script -->
+  <script src="js/atelier-page.js"></script>
+</body>
+</html>
