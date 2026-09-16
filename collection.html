@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Collection — Batik Parabos</title>
+  <meta name="description" content="Explore the curated collection of contemporary Indonesian batik from Batik Parabos.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/collection.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="collection-page">
+    
+    <!-- Editorial Header -->
+    <header class="collection-header container">
+      <h1 class="collection-header__title reveal">Collection</h1>
+      <p class="collection-header__subtitle reveal reveal--delay-1">
+        An exploration of contemporary Indonesian batik.
+      </p>
+    </header>
+
+    <!-- Controls (Filter & Sort) -->
+    <section class="collection-controls-wrap">
+      <div class="collection-controls container reveal reveal--delay-2">
+        
+        <div class="filter-group">
+          <ul class="category-filters" id="category-filters" role="tablist" aria-label="Product Categories">
+            <!-- Dynamically populated from products.js -->
+            <li role="presentation">
+              <button class="filter-btn is-active" role="tab" aria-selected="true" data-category="all">All</button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sort-group">
+          <label for="sort-select" class="visually-hidden">Sort by</label>
+          <div class="custom-select-wrapper">
+            <select id="sort-select" class="sort-select">
+              <option value="featured">Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section class="collection-grid-wrap container">
+      
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state hidden" aria-hidden="true">
+        <p class="empty-state__title">No pieces found.</p>
+        <p class="empty-state__subtitle">Try another collection or return to the full selection.</p>
+        <button id="reset-filters-btn" class="btn btn-secondary">View All Pieces</button>
+      </div>
+
+      <!-- Grid -->
+      <div id="product-grid" class="product-grid">
+        <!-- Products populated by collection.js -->
+      </div>
+      
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data/products.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <script src="js/collection.js"></script>
+</body>
+</html>
