@@ -3,38 +3,450 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Batik Parabos | Digital Atelier</title>
-  
+
+  <title>Batik Parabos — Digital Atelier</title>
+  <meta name="description" content="Batik Parabos is a digital atelier celebrating the art of Indonesian Batik. Explore our curated collection of handcrafted contemporary Batik garments.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/components.css">
-</head>
-<body>
-  
-  <div class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
-    <h1>Welcome to Batik Parabos</h1>
-    <p class="muted">Foundation successfully loaded. UI elements are tested below.</p>
-    
-    <div style="margin-top: 2rem;">
-      <button class="btn btn-primary" onclick="window.showToast('Test Primary action', 'success')">Primary Button</button>
-      <button class="btn btn-secondary" onclick="window.showToast('Test Secondary action')">Secondary Button</button>
-    </div>
-    
-    <div class="form-group" style="max-width: 300px; margin-top: 2rem;">
-      <label class="form-label">Email Address</label>
-      <input type="email" class="form-control" placeholder="Enter your email">
-    </div>
-  </div>
 
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/homepage.css">
+</head>
+
+<body>
+  <!--
+    Navbar & Footer are injected by:
+    js/components/navbar.js
+    js/components/footer.js
+  -->
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════════════════════
+         §1  HERO — Digital Atelier Gateway
+    ══════════════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Hero">
+
+      <div class="hero__bg"></div>
+
+      <!-- Background image (placeholder; swap src for real editorial photography) -->
+      <div class="hero__image-frame hero__parallax">
+        <img
+          src="assets/images/placeholder.svg"
+          alt="A craftsman's hands carefully stamping a Batik pattern on fine cloth"
+          width="1920"
+          height="1080"
+          fetchpriority="high"
+        >
+      </div>
+
+      <div class="hero__content">
+        <div class="container">
+
+          <div class="hero__text-col">
+            <span class="hero__kicker">Batik Parabos &nbsp;·&nbsp; Digital Atelier</span>
+
+            <h1 class="hero__headline">
+              Batik,<br>
+              <em>Reimagined.</em>
+            </h1>
+
+            <p class="hero__sub">
+              A contemporary expression of Indonesian heritage and craftsmanship —
+              designed for those who wear their identity with intention.
+            </p>
+
+            <div class="hero__actions">
+              <a href="collection.html" class="btn btn-primary">Explore Collection</a>
+              <a href="heritage.html" class="btn btn-ghost">Our Heritage</a>
+            </div>
+          </div>
+
+          <div class="hero__meta-col">
+            <p class="hero__vertical-text" aria-hidden="true">Est. Surakarta, Java</p>
+            <div class="hero__scroll-cue" aria-hidden="true">
+              <span>Scroll</span>
+              <div class="hero__scroll-line"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §2  MARQUEE STRIP — Brand credentials
+    ══════════════════════════════════════════════════════ -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <!-- Two identical sets for seamless loop -->
+        <div class="marquee-item"><span class="marquee-dot"></span>Hand-Stamped Batik</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Cotton Primissima</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Natural Dye Traditions</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Surakarta Craft</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Contemporary Silhouettes</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Bespoke Commissions</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Private Atelier Visits</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Hand-Stamped Batik</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Cotton Primissima</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Natural Dye Traditions</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Surakarta Craft</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Contemporary Silhouettes</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Bespoke Commissions</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Private Atelier Visits</div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §3  IMMERSIVE / PARALLAX PANEL
+    ══════════════════════════════════════════════════════ -->
+    <section class="immersive" aria-label="About Batik Parabos">
+
+      <div class="immersive__bg-layer" aria-hidden="true">
+        <img
+          src="assets/images/placeholder.svg"
+          alt=""
+          width="1920"
+          height="1080"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="container" style="position:relative; z-index:2;">
+        <div class="immersive__content">
+
+          <p class="immersive__label">The Parabos Philosophy</p>
+
+          <h2 class="immersive__headline reveal">
+            Where Indonesian<br>
+            tradition meets<br>
+            <em>contemporary form.</em>
+          </h2>
+
+          <p class="immersive__body reveal reveal--delay-1">
+            Batik is not merely a pattern. It is a language — one spoken by the
+            artisan's hand in wax and dye, across metres of cloth, over hours
+            that become days. At Parabos, we honour that language while giving
+            it a new vocabulary for the modern wardrobe.
+          </p>
+
+          <a href="heritage.html" class="btn btn-secondary reveal reveal--delay-2">
+            Discover Our Heritage
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Large decorative number -->
+      <span class="immersive__number" aria-hidden="true">01</span>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §4  HERITAGE SECTION
+    ══════════════════════════════════════════════════════ -->
+    <section class="heritage" aria-labelledby="heritage-heading">
+
+      <div class="heritage__grid">
+
+        <!-- Image column -->
+        <div class="heritage__image-col">
+          <img
+            src="assets/images/placeholder.svg"
+            alt="A Batik craftsman working in the atelier at Batik Parabos"
+            width="900"
+            height="1100"
+            loading="lazy"
+          >
+        </div>
+
+        <!-- Text column -->
+        <div class="heritage__text-col">
+
+          <span class="eyebrow reveal">Indonesian Heritage</span>
+
+          <h2 class="heritage__quote reveal reveal--delay-1" id="heritage-heading">
+            Patterns that carry<br>the memory of Java.
+          </h2>
+
+          <p class="heritage__body reveal reveal--delay-2">
+            Batik Parabos was born in Surakarta — a city whose royal court
+            traditions gave the world some of its most enduring textile art.
+            Each motif in our collection carries a history: Sogan earth tones
+            from the Solo court, Parang diagonals of the Mataram kingdom,
+            Kawung circles of purity.
+          </p>
+          <p class="heritage__body reveal reveal--delay-2">
+            We do not replicate tradition. We converse with it — bringing the
+            same devotion to craft into contemporary garments that belong in
+            the present.
+          </p>
+
+          <div class="heritage__facts reveal reveal--delay-2">
+            <div class="heritage__fact">
+              <p class="heritage__fact-num">5</p>
+              <p class="heritage__fact-label">Craftsmanship Stages</p>
+            </div>
+            <div class="heritage__fact">
+              <p class="heritage__fact-num">40+</p>
+              <p class="heritage__fact-label">Years of Tradition</p>
+            </div>
+          </div>
+
+          <a href="heritage.html" class="btn btn-secondary reveal reveal--delay-3">
+            Discover Our Heritage
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §5  CRAFTSMANSHIP SECTION
+    ══════════════════════════════════════════════════════ -->
+    <section class="craft" aria-labelledby="craft-heading">
+
+      <div class="container">
+        <div class="craft__header">
+          <span class="eyebrow reveal">The Craft</span>
+          <h2 class="craft__headline reveal reveal--delay-1" id="craft-heading">
+            Five stages. One garment.
+          </h2>
+          <p class="text-muted reveal reveal--delay-2" style="max-width:520px; margin:0 auto;">
+            Every Batik Parabos piece moves through five distinct stages of craft
+            before it arrives with you. Each stage requires skill, patience, and care
+            that cannot be automated.
+          </p>
+        </div>
+
+        <div class="craft__grid">
+
+          <article class="craft__item reveal" data-step="01">
+            <span class="craft__step">Stage 01</span>
+            <h3 class="craft__item-title">Cloth Preparation</h3>
+            <p class="craft__item-body">
+              Cotton Primissima is washed, boiled, and sun-dried to remove starch
+              and impurities. Only cloth that passes our hand-feel test proceeds.
+            </p>
+          </article>
+
+          <article class="craft__item reveal reveal--delay-1" data-step="02">
+            <span class="craft__step">Stage 02</span>
+            <h3 class="craft__item-title">Pattern Transfer</h3>
+            <p class="craft__item-body">
+              Traditional motifs are transferred by hand onto the cloth surface using
+              pencil guides. Each line is intentional; no digital projection is used.
+            </p>
+          </article>
+
+          <article class="craft__item reveal reveal--delay-2" data-step="03">
+            <span class="craft__step">Stage 03</span>
+            <h3 class="craft__item-title">Wax Application</h3>
+            <p class="craft__item-body">
+              Hot wax is applied with a stamp (cap) or a hand tool (canting).
+              The wax forms a resist barrier, defining which areas will remain
+              undyed in the final garment.
+            </p>
+          </article>
+
+          <article class="craft__item reveal" data-step="04">
+            <span class="craft__step">Stage 04</span>
+            <h3 class="craft__item-title">Natural Dyeing</h3>
+            <p class="craft__item-body">
+              We dye in sequence — light tones first, building depth through
+              successive dye baths. Each dip is timed by experience, not a clock.
+            </p>
+          </article>
+
+          <article class="craft__item reveal reveal--delay-1" data-step="05">
+            <span class="craft__step">Stage 05</span>
+            <h3 class="craft__item-title">Finishing &amp; Tailoring</h3>
+            <p class="craft__item-body">
+              Wax is removed by boiling. The cloth is pressed, inspected, and
+              cut to our patterns by our in-house tailors. Each garment is
+              signed before it leaves the atelier.
+            </p>
+          </article>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §6  COLLECTION PREVIEW
+    ══════════════════════════════════════════════════════ -->
+    <section class="collection-preview" aria-labelledby="collection-heading">
+      <div class="container">
+
+        <div class="collection-preview__header">
+          <div>
+            <span class="eyebrow reveal">The Collection</span>
+            <h2 class="collection-preview__headline reveal reveal--delay-1" id="collection-heading">
+              Selected Pieces
+            </h2>
+          </div>
+          <a href="collection.html" class="btn btn-secondary reveal">
+            Explore All Pieces
+          </a>
+        </div>
+
+        <!-- Cards are injected by homepage.js from products.js -->
+        <div
+          class="collection-preview__grid"
+          id="collection-preview-grid"
+          role="list"
+          aria-label="Featured Collection"
+        ></div>
+
+        <div style="text-align:center; margin-top:var(--spacing-xl);">
+          <a href="collection.html" class="btn btn-primary reveal">
+            View Full Collection
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §7  ATELIER SECTION
+    ══════════════════════════════════════════════════════ -->
+    <section class="atelier" aria-labelledby="atelier-heading">
+
+      <div class="atelier__bg" aria-hidden="true">
+        <img
+          src="assets/images/placeholder.svg"
+          alt=""
+          width="1920"
+          height="1080"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="container">
+        <div class="atelier__inner">
+
+          <!-- Left: copy -->
+          <div class="atelier__left">
+            <p class="atelier__label eyebrow reveal">Private Atelier</p>
+
+            <h2 class="atelier__headline reveal reveal--delay-1" id="atelier-heading">
+              Visit the<br><em>Atelier.</em>
+            </h2>
+
+            <p class="atelier__body reveal reveal--delay-2">
+              Beyond the digital experience, Batik Parabos maintains a private
+              physical atelier in Surakarta. By appointment, you may visit to
+              view the full collection, commission a bespoke piece, or simply
+              experience the craft firsthand.
+            </p>
+
+            <div class="atelier__features reveal reveal--delay-2">
+              <div class="atelier__feature">
+                <p class="atelier__feature-title">Private Viewing</p>
+                <p class="atelier__feature-desc">Collection viewing by appointment.</p>
+              </div>
+              <div class="atelier__feature">
+                <p class="atelier__feature-title">Craft Experience</p>
+                <p class="atelier__feature-desc">Guided batik-making session.</p>
+              </div>
+              <div class="atelier__feature">
+                <p class="atelier__feature-title">Bespoke Consultation</p>
+                <p class="atelier__feature-desc">Custom garment from scratch.</p>
+              </div>
+              <div class="atelier__feature">
+                <p class="atelier__feature-title">Fitting &amp; Alterations</p>
+                <p class="atelier__feature-desc">In-house tailoring consultation.</p>
+              </div>
+            </div>
+
+            <a href="heritage.html#atelier" class="btn btn-secondary reveal reveal--delay-3">
+              Reserve an Atelier Visit
+            </a>
+          </div>
+
+          <!-- Right: decorative stat block -->
+          <div class="atelier__right" aria-hidden="true">
+            <div class="atelier__stat-block">
+              <p class="atelier__stat-num">By</p>
+              <p class="atelier__stat-label">Appointment Only</p>
+            </div>
+            <div class="atelier__stat-block">
+              <p class="atelier__stat-num">Solo,</p>
+              <p class="atelier__stat-label">Surakarta, Java</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         §8  FINAL CTA — Begin Your Collection
+    ══════════════════════════════════════════════════════ -->
+    <section class="final-cta" aria-labelledby="final-cta-heading">
+      <div class="container container--narrow">
+
+        <span class="eyebrow final-cta__eyebrow reveal">Begin</span>
+
+        <h2 class="final-cta__headline reveal reveal--delay-1" id="final-cta-heading">
+          Your<br><em>Collection</em><br>Awaits.
+        </h2>
+
+        <p class="final-cta__sub reveal reveal--delay-2">
+          Each piece in our collection was made to be worn, not merely admired.
+          Explore the full atelier and find the piece that speaks to you.
+        </p>
+
+        <div class="final-cta__actions reveal reveal--delay-3">
+          <a href="collection.html" class="btn btn-primary">Explore Collection</a>
+          <a href="heritage.html"   class="btn btn-secondary">Our Heritage</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- /#main-content -->
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCRIPTS — Foundation first, then page-specific
+  ══════════════════════════════════════════════════════ -->
+
+  <!-- Foundation: data & state -->
   <script src="js/data/products.js"></script>
   <script src="js/state/storage.js"></script>
   <script src="js/state/cart.js"></script>
   <script src="js/state/wishlist.js"></script>
   <script src="js/state/orders.js"></script>
   <script src="js/state/appointments.js"></script>
+
+  <!-- Foundation: utilities & shared components -->
   <script src="js/utils.js"></script>
   <script src="js/components/toast.js"></script>
   <script src="js/components/navbar.js"></script>
   <script src="js/components/footer.js"></script>
+
+  <!-- Page-specific -->
+  <script src="js/homepage.js"></script>
+
 </body>
 </html>

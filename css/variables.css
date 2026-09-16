@@ -1,23 +1,48 @@
 :root {
-  --bg: #070707;
-  --surface: #111111;
-  --gold: #C9A227;
-  --gold-dim: #8F741A;
-  --ivory: #F3EBDD;
-  --muted: #A7A097;
-  --line: #2A2723;
-  --indigo: #273B70;
-  --sogan: #8A5A32;
+  /* ── Brand Palette ─────────────────────────────── */
+  --bg:           #070707;
+  --surface:      #111111;
+  --surface-2:    #161412;
+  --gold:         #C9A227;
+  --gold-dim:     #8F741A;
+  --gold-subtle:  rgba(201, 162, 39, 0.08);
+  --ivory:        #F3EBDD;
+  --ivory-dim:    rgba(243, 235, 221, 0.6);
+  --muted:        #A7A097;
+  --muted-dim:    rgba(167, 160, 151, 0.4);
+  --line:         #2A2723;
+  --line-subtle:  rgba(42, 39, 35, 0.5);
+  --indigo:       #273B70;
+  --sogan:        #8A5A32;
 
+  /* ── Typography ─────────────────────────────────── */
   --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'Jost', sans-serif;
+  --font-body:    'Jost', sans-serif;
 
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 4rem;
+  /* ── Type Scale ──────────────────────────────────── */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2rem;
+  --text-3xl:  3rem;
+  --text-4xl:  4.5rem;
+  --text-5xl:  6rem;
+  --text-hero: clamp(3.5rem, 8vw, 7.5rem);
+
+  /* ── Spacing ─────────────────────────────────────── */
+  --spacing-xs:  0.25rem;
+  --spacing-sm:  0.5rem;
+  --spacing-md:  1rem;
+  --spacing-lg:  2rem;
+  --spacing-xl:  4rem;
   --spacing-xxl: 8rem;
 
-  --transition: all 0.3s ease;
+  /* ── Transitions ─────────────────────────────────── */
+  --transition:      all 0.3s ease;
+  --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ── Layout ──────────────────────────────────────── */
+  --navbar-h: 72px;
 }
