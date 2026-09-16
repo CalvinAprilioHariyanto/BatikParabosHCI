@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shopping Cart — Batik Parabos</title>
+  <meta name="description" content="Review the pieces selected for your collection.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="cart-page">
+    <div class="container">
+      
+      <!-- CART HEADER -->
+      <header class="cart-header">
+        <span class="cart-header__subtitle">Your Selection</span>
+        <h1 class="cart-header__title">Shopping Cart</h1>
+        <p class="cart-header__desc">Review the pieces selected for your collection.</p>
+      </header>
+
+      <!-- EMPTY STATE (Hidden by default) -->
+      <div id="cart-empty" class="cart-empty hidden">
+        <p class="cart-empty__message">Your cart is currently empty.</p>
+        <p class="cart-empty__desc">Discover pieces from the collection.</p>
+        <a href="collection.html" class="btn btn-primary">Explore the Collection</a>
+      </div>
+
+      <!-- CART CONTENT LAYOUT -->
+      <div id="cart-content" class="cart-content-layout hidden">
+        
+        <!-- LEFT: Items -->
+        <div class="cart-items" id="cart-items-container">
+          <!-- Items injected by JS -->
+        </div>
+
+        <!-- RIGHT: Summary -->
+        <aside class="cart-summary">
+          <h2 class="cart-summary__title">Order Summary</h2>
+          
+          <div class="cart-summary__rows">
+            <div class="summary-row">
+              <span class="summary-label">Subtotal</span>
+              <span class="summary-value" id="summary-subtotal">Rp 0</span>
+            </div>
+            
+            <div class="summary-row">
+              <span class="summary-label">Shipping</span>
+              <span class="summary-value">Complimentary</span>
+            </div>
+            
+            <div class="summary-row summary-total">
+              <span class="summary-label">Total</span>
+              <span class="summary-value" id="summary-total">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="cart-summary__actions">
+            <a href="checkout.html" class="btn btn-primary btn-block">Proceed to Checkout</a>
+            <a href="collection.html" class="btn btn-secondary btn-block">Continue Shopping</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <!-- Ensure storage and state are loaded first -->
+  <script src="js/data/products.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <!-- Page specific script -->
+  <script src="js/cart-page.js"></script>
+</body>
+</html>
