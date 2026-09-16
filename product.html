@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Product — Batik Parabos</title>
+  <meta name="description" content="Discover the craftsmanship behind Batik Parabos.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/product.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="product-page">
+    
+    <!-- Empty / Error State (Hidden by default) -->
+    <div id="product-error" class="product-error hidden container">
+      <h1 class="product-error__title">Piece not found.</h1>
+      <p class="product-error__subtitle">This piece may be unavailable or the link is incorrect.</p>
+      <a href="collection.html" class="btn btn-secondary">Back to Collection</a>
+    </div>
+
+    <!-- Main Product Layout -->
+    <div id="product-container" class="product-container container hidden">
+      
+      <!-- SECTION 1: Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="collection.html">Collection</a></li>
+          <li aria-hidden="true" class="breadcrumb-separator">/</li>
+          <li><a href="collection.html" id="breadcrumb-category">Category</a></li>
+          <li aria-hidden="true" class="breadcrumb-separator">/</li>
+          <li aria-current="page" id="breadcrumb-name">Product Name</li>
+        </ol>
+      </nav>
+
+      <div class="product-grid-layout">
+        
+        <!-- SECTION 2: Product Visual Gallery -->
+        <div class="product-gallery">
+          <div class="product-gallery__main">
+            <button class="product-gallery__zoom-btn" id="zoom-open-btn" aria-label="Zoom image">
+              <img id="main-product-image" src="" alt="Product view" fetchpriority="high">
+              <div class="zoom-hint" aria-hidden="true">Click to inspect</div>
+            </button>
+          </div>
+          <div class="product-gallery__thumbnails" id="thumbnail-container">
+            <!-- Thumbnails injected by JS -->
+          </div>
+        </div>
+
+        <!-- Right Column: Info & Actions -->
+        <div class="product-details">
+          
+          <!-- SECTION 3: Product Information -->
+          <div class="product-info">
+            <h1 class="product-info__title" id="product-title">Product Name</h1>
+            <p class="product-info__price" id="product-price">IDR 0</p>
+            
+            <div class="product-info__specs">
+              <div class="spec-item" id="spec-motif-container">
+                <span class="spec-label">Motif</span>
+                <span class="spec-value" id="product-motif"></span>
+              </div>
+              <div class="spec-item" id="spec-material-container">
+                <span class="spec-label">Material</span>
+                <span class="spec-value" id="product-material"></span>
+              </div>
+            </div>
+
+            <p class="product-info__desc" id="product-desc">
+              Description goes here.
+            </p>
+          </div>
+
+          <div class="product-actions-wrapper">
+            <!-- SECTION 4: Size Selection -->
+            <div class="product-size" id="size-section">
+              <div class="product-size__header">
+                <span class="product-size__label">Size</span>
+                <!-- SECTION 9: Size Assistant -->
+                <button type="button" class="btn-text size-assistant-btn" id="open-size-assistant">Size Assistant — Preview</button>
+              </div>
+              <div class="product-size__options" id="size-options" role="radiogroup" aria-label="Select Size">
+                <!-- Sizes injected by JS -->
+              </div>
+            </div>
+
+            <!-- SECTION 5: Quantity -->
+            <div class="product-quantity">
+              <span class="product-size__label">Quantity</span>
+              <div class="quantity-control">
+                <button type="button" class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+                <input type="number" id="qty-input" class="qty-input" value="1" min="1" aria-label="Quantity">
+                <button type="button" class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+              </div>
+            </div>
+
+            <!-- SECTION 6: Purchase Actions -->
+            <div class="product-purchase">
+              <button type="button" class="btn btn-primary btn-block" id="add-to-cart-btn">Add to Cart</button>
+              <button type="button" class="btn btn-secondary btn-block" id="buy-now-btn">Buy Now</button>
+            </div>
+
+            <!-- SECTION 7: Wishlist & SECTION 10: Virtual Fitting -->
+            <div class="product-secondary-actions">
+              <button type="button" class="btn-text icon-btn" id="wishlist-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <span id="wishlist-text">Add to Wishlist</span>
+              </button>
+
+              <button type="button" class="btn-text icon-btn" id="open-virtual-fitting">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span>Virtual Fitting Preview</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- SECTION 8: Craftsmanship Story -->
+          <div class="product-story">
+            <h3 class="product-story__title">The Craft Behind This Piece</h3>
+            <p class="product-story__desc">
+              Every piece of Batik Parabos is the result of dedicated artisanship, honoring the heritage of Java while embracing contemporary form.
+            </p>
+            <a href="heritage.html" class="product-story__link">Discover Our Heritage</a>
+          </div>
+
+        </div>
+      </div>
+      
+      <!-- SECTION 11: Continue Shopping -->
+      <div class="continue-shopping">
+        <a href="collection.html" class="btn btn-secondary">Continue Exploring</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modals -->
+
+  <!-- Image Zoom Lightbox -->
+  <dialog id="zoom-modal" class="zoom-modal">
+    <button class="zoom-modal__close" id="zoom-close-btn" aria-label="Close zoom">✕</button>
+    <div class="zoom-modal__content">
+      <img id="zoom-image" src="" alt="Zoomed product view">
+    </div>
+  </dialog>
+
+  <!-- Size Assistant Modal (Simulation) -->
+  <dialog id="size-modal" class="simulation-modal">
+    <button class="simulation-modal__close" aria-label="Close modal">✕</button>
+    <div class="simulation-modal__header">
+      <h2>Size Assistant <span class="badge">Preview</span></h2>
+    </div>
+    <div class="simulation-modal__body">
+      <p class="simulation-desc">Select your preferences for a personalized recommendation. (Frontend Demonstration)</p>
+      
+      <div class="form-group">
+        <label for="sim-height">Height Range</label>
+        <select id="sim-height" class="sim-select">
+          <option value="">Select...</option>
+          <option value="1">Under 160cm</option>
+          <option value="2">160cm - 175cm</option>
+          <option value="3">Over 175cm</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="sim-fit">Fit Preference</label>
+        <select id="sim-fit" class="sim-select">
+          <option value="">Select...</option>
+          <option value="tight">Tailored</option>
+          <option value="regular">Regular</option>
+          <option value="loose">Relaxed</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-secondary btn-block" id="sim-calculate-btn">Find My Size</button>
+
+      <div id="sim-result" class="sim-result hidden">
+        <p>Suggested size:</p>
+        <h3 id="sim-suggested-size">-</h3>
+        <button type="button" class="btn btn-primary btn-block" id="sim-apply-size">Apply Size</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Virtual Fitting Modal (Simulation) -->
+  <dialog id="fitting-modal" class="simulation-modal">
+    <button class="simulation-modal__close" aria-label="Close modal">✕</button>
+    <div class="simulation-modal__header">
+      <h2>Virtual Fitting <span class="badge">Simulation</span></h2>
+    </div>
+    <div class="simulation-modal__body fitting-body">
+      <div class="fitting-preview">
+        <!-- Generic silhouette placeholder -->
+        <div class="fitting-silhouette"></div>
+        <img id="fitting-garment" src="" alt="Garment preview" class="fitting-garment">
+      </div>
+      <p class="simulation-desc text-center mt-lg">
+        This is a visual preview demonstrating how the selected garment might drape. Real AR fitting coming soon.
+      </p>
+    </div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="js/data/products.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <script src="js/product.js"></script>
+</body>
+</html>
