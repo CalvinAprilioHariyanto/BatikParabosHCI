@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batik Parabos | Digital Atelier</title>
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  
+  <div class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <h1>Welcome to Batik Parabos</h1>
+    <p class="muted">Foundation successfully loaded. UI elements are tested below.</p>
+    
+    <div style="margin-top: 2rem;">
+      <button class="btn btn-primary" onclick="window.showToast('Test Primary action', 'success')">Primary Button</button>
+      <button class="btn btn-secondary" onclick="window.showToast('Test Secondary action')">Secondary Button</button>
+    </div>
+    
+    <div class="form-group" style="max-width: 300px; margin-top: 2rem;">
+      <label class="form-label">Email Address</label>
+      <input type="email" class="form-control" placeholder="Enter your email">
+    </div>
+  </div>
+
+  <script src="js/data/products.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+</body>
+</html>
