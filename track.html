@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Track Order — Batik Parabos</title>
+  <meta name="description" content="Track your order status.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/track.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="track-page">
+    <div class="container">
+      
+      <!-- SEARCH STATE -->
+      <div id="track-search-state" class="track-state-section hidden">
+        <header class="track-header">
+          <span class="track-header__subtitle">Track Your Order</span>
+          <h1 class="track-header__title">Enter Order Details</h1>
+        </header>
+
+        <form id="track-search-form" class="track-search-form" novalidate>
+          <div class="form-group">
+            <label for="search-order-number">Order Number</label>
+            <input type="text" id="search-order-number" name="order" placeholder="e.g. PB-2026-123" required aria-required="true">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Track Order</button>
+        </form>
+      </div>
+
+      <!-- ERROR STATE -->
+      <div id="track-error-state" class="track-state-section hidden">
+        <header class="track-header">
+          <h1 class="track-header__title">Order Not Found</h1>
+          <p class="track-header__desc">We couldn't find an order with that number.</p>
+        </header>
+        <div class="track-actions-center">
+          <button id="btn-try-again" class="btn btn-primary">Try Another Order</button>
+          <a href="collection.html" class="btn btn-secondary">Back to Collection</a>
+        </div>
+      </div>
+
+      <!-- DETAILS STATE -->
+      <div id="track-details-state" class="track-details-layout hidden">
+        
+        <header class="track-details-header">
+          <h1 class="track-details__title" id="display-order-number"></h1>
+          <p class="track-details__date" id="display-order-date"></p>
+        </header>
+
+        <div class="track-columns">
+          
+          <!-- LEFT COLUMN: Timeline & Summary -->
+          <div class="track-col-main">
+            
+            <section class="track-section">
+              <h2 class="track-section__title">Status <span class="sim-badge">(Demo)</span></h2>
+              <div class="timeline" id="order-timeline">
+                <!-- Timeline items injected by JS -->
+              </div>
+            </section>
+
+            <section class="track-section">
+              <h2 class="track-section__title">Order Items</h2>
+              <div class="order-items" id="order-items-container">
+                <!-- Items injected by JS -->
+              </div>
+            </section>
+          </div>
+
+          <!-- RIGHT COLUMN: Information -->
+          <aside class="track-col-side">
+            <div class="track-info-card">
+              
+              <section class="track-info-section">
+                <h3 class="track-info__title">Delivery To</h3>
+                <div class="track-info__content" id="display-shipping-address">
+                  <!-- Injected by JS -->
+                </div>
+              </section>
+
+              <section class="track-info-section">
+                <h3 class="track-info__title">Payment Method</h3>
+                <div class="track-info__content" id="display-payment-method">
+                  <!-- Injected by JS -->
+                </div>
+              </section>
+
+              <section class="track-info-section">
+                <h3 class="track-info__title">Summary</h3>
+                <div class="track-summary-rows">
+                  <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="display-subtotal"></span>
+                  </div>
+                  <div class="summary-row">
+                    <span class="summary-label">Shipping</span>
+                    <span class="summary-value" id="display-shipping"></span>
+                  </div>
+                  <div class="summary-row summary-total">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value" id="display-total"></span>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </aside>
+          
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <!-- Page specific script -->
+  <script src="js/track-page.js"></script>
+</body>
+</html>
