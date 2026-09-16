@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Checkout — Batik Parabos</title>
+  <meta name="description" content="Complete Your Selection.">
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Foundation CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Page-specific CSS -->
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+
+<body>
+  <!-- Navbar & Footer injected by JS -->
+
+  <main id="main-content" class="checkout-page">
+    <div class="container">
+      
+      <!-- CHECKOUT HEADER -->
+      <header class="checkout-header" id="checkout-header">
+        <span class="checkout-header__subtitle">Checkout</span>
+        <h1 class="checkout-header__title">Complete Your Selection</h1>
+      </header>
+
+      <!-- EMPTY STATE (Hidden by default) -->
+      <div id="checkout-empty" class="checkout-empty hidden">
+        <p class="checkout-empty__message">Your selection is empty.</p>
+        <p class="checkout-empty__desc">Add a piece to your selection before continuing.</p>
+        <a href="collection.html" class="btn btn-primary">Return to Collection</a>
+      </div>
+
+      <!-- CHECKOUT CONTENT LAYOUT -->
+      <div id="checkout-content" class="checkout-content-layout hidden">
+        
+        <!-- LEFT: Forms -->
+        <div class="checkout-forms">
+          <form id="checkout-form" novalidate>
+            
+            <section class="checkout-section">
+              <h2 class="checkout-section__title">Contact Information</h2>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="customer-name">Full Name *</label>
+                  <input type="text" id="customer-name" name="customer-name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="customer-email">Email *</label>
+                  <input type="email" id="customer-email" name="customer-email" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="customer-phone">Phone Number *</label>
+                  <input type="tel" id="customer-phone" name="customer-phone" required aria-required="true">
+                </div>
+              </div>
+            </section>
+
+            <section class="checkout-section">
+              <h2 class="checkout-section__title">Shipping Address</h2>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="shipping-name">Full Name *</label>
+                  <input type="text" id="shipping-name" name="shipping-name" required aria-required="true">
+                </div>
+                <div class="form-group full-width">
+                  <label for="shipping-address">Address *</label>
+                  <input type="text" id="shipping-address" name="shipping-address" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="shipping-city">City *</label>
+                  <input type="text" id="shipping-city" name="shipping-city" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="shipping-province">Province *</label>
+                  <input type="text" id="shipping-province" name="shipping-province" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="shipping-postal">Postal Code *</label>
+                  <input type="text" id="shipping-postal" name="shipping-postal" required aria-required="true">
+                </div>
+                <div class="form-group">
+                  <label for="shipping-phone">Phone Number *</label>
+                  <input type="tel" id="shipping-phone" name="shipping-phone" required aria-required="true">
+                </div>
+              </div>
+            </section>
+
+            <section class="checkout-section">
+              <h2 class="checkout-section__title">Payment Method</h2>
+              <p class="checkout-section__desc">Select a simulated payment method for this demo.</p>
+              
+              <div class="payment-methods" role="radiogroup" aria-label="Payment Method">
+                <label class="payment-method-card">
+                  <input type="radio" name="payment-method" value="Bank Transfer" required>
+                  <span class="payment-method-card__inner">
+                    <span class="payment-method__title">Bank Transfer</span>
+                    <span class="payment-method__desc">Simulated direct transfer</span>
+                  </span>
+                </label>
+                <label class="payment-method-card">
+                  <input type="radio" name="payment-method" value="QRIS" required>
+                  <span class="payment-method-card__inner">
+                    <span class="payment-method__title">QRIS</span>
+                    <span class="payment-method__desc">Simulated QR payment</span>
+                  </span>
+                </label>
+                <label class="payment-method-card">
+                  <input type="radio" name="payment-method" value="Virtual Account" required>
+                  <span class="payment-method-card__inner">
+                    <span class="payment-method__title">Virtual Account</span>
+                    <span class="payment-method__desc">Simulated VA</span>
+                  </span>
+                </label>
+              </div>
+            </section>
+
+          </form>
+        </div>
+
+        <!-- RIGHT: Summary -->
+        <aside class="checkout-summary">
+          <h2 class="checkout-summary__title">Order Summary</h2>
+          
+          <div class="checkout-items" id="checkout-items-container">
+            <!-- Items injected by JS -->
+          </div>
+
+          <div class="checkout-summary__rows">
+            <div class="summary-row">
+              <span class="summary-label">Subtotal</span>
+              <span class="summary-value" id="summary-subtotal">Rp 0</span>
+            </div>
+            
+            <div class="summary-row">
+              <span class="summary-label">Shipping</span>
+              <span class="summary-value">Complimentary</span>
+            </div>
+            
+            <div class="summary-row summary-total">
+              <span class="summary-label">Total</span>
+              <span class="summary-value" id="summary-total">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="checkout-summary__actions">
+            <!-- Submit button triggers the form via JS or attribute -->
+            <button type="submit" form="checkout-form" class="btn btn-primary btn-block" id="place-order-btn">Place Order</button>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- CONFIRMATION STATE (Hidden by default) -->
+      <div id="checkout-confirmation" class="checkout-confirmation hidden">
+        <span class="confirmation-subtitle">Order Received</span>
+        <h2 class="confirmation-title">Thank you for your selection.</h2>
+        <p class="confirmation-desc">Your order has been recorded in this demo.</p>
+        
+        <div class="confirmation-details">
+          <div class="detail-row">
+            <span class="detail-label">Order Number</span>
+            <span class="detail-value" id="confirm-order-number"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Order Date</span>
+            <span class="detail-value" id="confirm-order-date"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Payment Method</span>
+            <span class="detail-value" id="confirm-payment-method"></span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Total</span>
+            <span class="detail-value" id="confirm-total"></span>
+          </div>
+        </div>
+
+        <div class="confirmation-actions">
+          <a href="#" id="track-order-link" class="btn btn-primary btn-block">View Order / Track</a>
+          <a href="collection.html" class="btn btn-secondary btn-block">Continue Shopping</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/data/products.js"></script>
+  <script src="js/state/storage.js"></script>
+  <script src="js/state/cart.js"></script>
+  <script src="js/state/wishlist.js"></script>
+  <script src="js/state/orders.js"></script>
+  <script src="js/state/appointments.js"></script>
+  
+  <script src="js/utils.js"></script>
+  <script src="js/components/toast.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  
+  <!-- Page specific script -->
+  <script src="js/checkout-page.js"></script>
+</body>
+</html>
