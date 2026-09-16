@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════════════
+   WISHLIST PAGE STYLES
+═══════════════════════════════════════════════════════ */
+
+.wishlist-page {
+  padding-top: calc(var(--navbar-h) + var(--spacing-xxl));
+  padding-bottom: var(--spacing-xxxl);
+  min-height: 100vh;
+  background-color: var(--bg);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § HEADER
+═══════════════════════════════════════════════════════ */
+.wishlist-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.wishlist-header__subtitle {
+  display: block;
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wishlist-header__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  color: var(--ivory);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wishlist-header__desc {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § EMPTY STATE
+═══════════════════════════════════════════════════════ */
+.wishlist-empty {
+  text-align: center;
+  padding: var(--spacing-xxxl) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.wishlist-empty__message {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--ivory);
+  margin-bottom: var(--spacing-sm);
+}
+
+.wishlist-empty__desc {
+  color: var(--muted);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § PRODUCT GRID 
+   Uses existing .product-grid from foundation
+   Adding minor overrides for wishlist specific card actions
+═══════════════════════════════════════════════════════ */
+.wishlist-content {
+  margin-top: var(--spacing-xl);
+}
+
+.wishlist-card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-sm);
+}
+
+.btn-remove-wishlist {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color var(--transition-fast);
+}
+
+.btn-remove-wishlist:hover {
+  color: var(--gold);
+}
