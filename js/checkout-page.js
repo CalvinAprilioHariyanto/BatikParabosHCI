@@ -32,29 +32,58 @@ document.addEventListener('DOMContentLoaded', () => {
     contentLayout.classList.add('hidden');
     emptyState.classList.remove('hidden');
     return;
+  } else {
+    // Reveal checkout content
+    contentLayout.classList.remove('hidden');
+    emptyState.classList.add('hidden');
   }
 
   // Render Summary Items
-  cart.forEach(item => {
-    const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/tes.jpg';
-    const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
-    const lineTotal = item.price * item.quantity;
+  try {
+    cart.forEach((item, index) => {
+      if (!item) {
+        console.warn(`Skipping malformed cart item at index ${index}`, item);
+        return;
+      }
+      
+      const safeName = item.name || 'Batik Parabos Piece';
+      const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/placeholder.svg';
+      const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
+      
+      let lineTotalDisplay = 'Inquire';
+      let unitPrice = 'Inquire';
 
-    const itemEl = document.createElement('div');
-    itemEl.className = 'checkout-item';
-    itemEl.innerHTML = `
-      <img src="${imageSrc}" alt="${item.name}" class="checkout-item__image" loading="lazy">
-      <div class="checkout-item__details">
-        <h4 class="checkout-item__title">${item.name}</h4>
-        ${sizeText ? `<span class="checkout-item__meta">${sizeText}</span>` : ''}
-        <span class="checkout-item__meta">Qty: ${item.quantity}</span>
-      </div>
-      <div class="checkout-item__price">
-        ${formatPrice(lineTotal)}
-      </div>
-    `;
-    itemsContainer.appendChild(itemEl);
-  });
+      if (item.priceLabel) {
+        unitPrice = item.priceLabel;
+      } else if (item.price !== null && item.price !== undefined) {
+        unitPrice = typeof window.formatRupiah === 'function' ? window.formatRupiah(item.price) : `IDR ${item.price.toLocaleString()}`;
+      }
+
+      if (item.price !== null && item.price !== undefined) {
+        lineTotalDisplay = typeof window.formatRupiah === 'function' ? window.formatRupiah(item.price * (item.quantity || 1)) : `IDR ${(item.price * (item.quantity || 1)).toLocaleString()}`;
+      } else {
+        lineTotalDisplay = unitPrice;
+      }
+
+      const itemEl = document.createElement('div');
+      itemEl.className = 'checkout-item';
+      itemEl.innerHTML = `
+        <img src="${imageSrc}" alt="${safeName}" class="checkout-item__image" loading="lazy">
+        <div class="checkout-item__details">
+          <h4 class="checkout-item__title">${safeName}</h4>
+          ${sizeText ? `<span class="checkout-item__meta">${sizeText}</span>` : ''}
+          <span class="checkout-item__meta">Qty: ${item.quantity || 1}</span>
+        </div>
+        <div class="checkout-item__price">
+          ${lineTotalDisplay}
+        </div>
+      `;
+      itemsContainer.appendChild(itemEl);
+    });
+  } catch (error) {
+    console.error("Error rendering checkout items:", error);
+    if (window.showToast) window.showToast("Error rendering order summary.", "error");
+  }
 
   // Render Totals
   const subtotal = cartAPI.getCartSubtotal();
@@ -154,6 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Scroll to top
     window.scrollTo(0, 0);
+
+    // Play success sound
+    if (window.playUISound) window.playUISound('checkout-success');
   }
 
 });

@@ -32,7 +32,7 @@
         <p class="atelier-hero__desc">Experience the collection beyond the screen.</p>
       </div>
       <div class="atelier-hero__image-wrapper">
-        <img src="assets/images/tes.jpg" alt="The Batik Parabos Atelier" class="atelier-hero__image">
+        <img src="assets/images/ateiler.jpg" alt="The Batik Parabos Atelier" class="atelier-hero__image">
       </div>
     </section>
 
@@ -65,7 +65,7 @@
                   <input type="radio" name="experience" id="exp-private" value="Private Atelier Visit" required>
                   <div class="experience-card__content">
                     <div class="experience-card__image">
-                      <img src="assets/images/tes.jpg" alt="Private Atelier Visit" style="object-position: center top;">
+                      <img id="visit-image" src="assets/images/visit.jpg" alt="Private Atelier Visit" style="object-position: center top;">
                       <div class="experience-card__marker"></div>
                     </div>
                     <div class="experience-card__text">
@@ -79,7 +79,7 @@
                   <input type="radio" name="experience" id="exp-craft" value="Craft Experience" required>
                   <div class="experience-card__content">
                     <div class="experience-card__image">
-                      <img src="assets/images/tes.jpg" alt="Craft Experience" style="object-position: center 40%;">
+                      <img src="assets/images/craftman.jpg" alt="Craft Experience" style="object-position: center 40%;">
                       <div class="experience-card__marker"></div>
                     </div>
                     <div class="experience-card__text">
@@ -93,7 +93,7 @@
                   <input type="radio" name="experience" id="exp-bespoke" value="Bespoke Consultation" required>
                   <div class="experience-card__content">
                     <div class="experience-card__image">
-                      <img src="assets/images/tes.jpg" alt="Bespoke Consultation" style="object-position: 30% center;">
+                      <img src="assets/images/bespoke.jpg" alt="Bespoke Consultation" style="object-position: 30% center;">
                       <div class="experience-card__marker"></div>
                     </div>
                     <div class="experience-card__text">
@@ -107,7 +107,7 @@
                   <input type="radio" name="experience" id="exp-collection" value="Collection Viewing" required>
                   <div class="experience-card__content">
                     <div class="experience-card__image">
-                      <img src="assets/images/tes.jpg" alt="Collection Viewing" style="object-position: 70% center;">
+                      <img src="assets/images/collection-view.jpg" alt="Collection Viewing" style="object-position: 70% center;">
                       <div class="experience-card__marker"></div>
                     </div>
                     <div class="experience-card__text">
@@ -118,8 +118,8 @@
                 </label>
 
               </div>
-              <div class="form-actions text-right">
-                <button type="button" class="btn btn-primary" id="btn-next-1">Continue to Details</button>
+              <div class="atelier-actions">
+                <button type="button" class="btn btn-primary atelier-continue-btn" id="btn-next-1">Continue to Details</button>
               </div>
             </div>
 
@@ -251,6 +251,7 @@
   <script src="js/state/appointments.js"></script>
   
   <script src="js/utils.js"></script>
+  <script src="js/ui-sounds.js"></script>
   <script src="js/components/toast.js"></script>
   <script src="js/components/navbar.js"></script>
   <script src="js/components/footer.js"></script>

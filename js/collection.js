@@ -11,18 +11,36 @@ document.addEventListener('DOMContentLoaded', () => {
   // State
   let currentCategory = 'all';
   let currentSort = 'featured';
+  let currentSearchQuery = '';
+
+  // Search Elements
+  const searchInput = document.getElementById('collection-search');
+  const clearSearchBtn = document.getElementById('clear-search-btn');
 
   // Initialize
   initFilters();
+  initSearch();
   renderProducts();
+
+  // Play subtle entrance sound once
+  if (window.playUISound) window.playUISound('collection-enter');
 
   // ═══════════════════════════════════════════════════════
   // § 1. RENDER PRODUCTS
   // ═══════════════════════════════════════════════════════
   function renderProducts() {
     let filteredProducts = products.filter(p => {
-      if (currentCategory === 'all') return true;
-      return p.category === currentCategory;
+      // 1. Category Filter
+      if (currentCategory !== 'all' && p.category !== currentCategory) return false;
+      
+      // 2. Search Filter
+      if (currentSearchQuery) {
+        const query = currentSearchQuery.toLowerCase();
+        const searchableText = `${p.name} ${p.description || ''} ${p.motif || ''} ${p.category || ''} ${p.material || ''}`.toLowerCase();
+        if (!searchableText.includes(query)) return false;
+      }
+      
+      return true;
     });
 
     // Sort
@@ -47,32 +65,46 @@ document.addEventListener('DOMContentLoaded', () => {
       emptyState.classList.add('hidden');
       
       filteredProducts.forEach(product => {
-        // Use correct price formatter
-        const price = typeof window.formatRupiah === 'function'
-          ? window.formatRupiah(product.price)
-          : `IDR ${product.price.toLocaleString('id-ID')}`;
+        // Safely extract properties
+        const safeMotif = product.motif || 'Signature Batik Motif';
+        const safeMaterial = product.material || 'Premium Batik Textile';
+        const safeCategory = product.category || 'Collection';
+        const safeName = product.name || 'Batik Parabos Piece';
+
+        const isBespoke = typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product);
+        const overlayText = isBespoke ? 'INQUIRE' : 'View Piece';
+
+        // Use priceLabel if available, otherwise format numeric price safely
+        let price = 'Inquire';
+        if (product.priceLabel) {
+          price = product.priceLabel;
+        } else if (product.price !== null && product.price !== undefined) {
+          price = typeof window.formatRupiah === 'function'
+            ? window.formatRupiah(product.price)
+            : `IDR ${product.price.toLocaleString('id-ID')}`;
+        }
         
         const isWishlisted = window.wishlistAPI ? window.wishlistAPI.isWishlisted(product.id) : false;
         
         const card = document.createElement('article');
         card.className = 'product-card reveal';
         card.innerHTML = `
-          <a href="product.html?id=${product.id}" class="product-card__link" aria-label="View ${product.name}">
+          <a href="${isBespoke ? `inquire.html?product=${product.id}` : `product.html?id=${product.id}`}" class="product-card__link" aria-label="${overlayText} ${safeName}">
             <div class="product-card__image-wrap">
               <img
-                src="${product.images[0]}"
-                alt="${product.name} — ${product.motif || product.category} motif"
+                src="${product.images && product.images.length > 0 ? product.images[0] : 'assets/images/placeholder.svg'}"
+                alt="${safeName} — ${safeMotif} motif"
                 loading="lazy"
               >
-              ${product.type === 'custom' ? '<span class="product-card__type-badge">Bespoke</span>' : ''}
+              ${product.type === 'custom' || product.type === 'Jacket' || product.type === 'Blazer' ? '<span class="product-card__type-badge">Bespoke</span>' : ''}
               <div class="product-card__overlay">
-                <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">View Piece</span>
+                <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">${overlayText}</span>
               </div>
             </div>
             <div class="product-card__body">
-              <span class="product-card__category">${product.category}</span>
-              <h3 class="product-card__name">${product.name}</h3>
-              <p class="product-card__motif">${product.motif} · ${product.material}</p>
+              <span class="product-card__category">${safeCategory}</span>
+              <h3 class="product-card__name">${safeName}</h3>
+              <p class="product-card__motif">${safeMotif} · ${safeMaterial}</p>
               <p class="product-card__price">${price}</p>
             </div>
           </a>
@@ -210,6 +242,32 @@ document.addEventListener('DOMContentLoaded', () => {
       currentCategory = 'all';
       renderProducts();
     });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // § 4.1 SEARCH (Empty State + Clear)
+  // ═══════════════════════════════════════════════════════
+  function initSearch() {
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearchQuery = e.target.value;
+      if (currentSearchQuery.trim() !== '') {
+        clearSearchBtn.classList.remove('hidden');
+      } else {
+        clearSearchBtn.classList.add('hidden');
+      }
+      renderProducts();
+    });
+
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+        renderProducts();
+      });
+    }
   }
 
   // ═══════════════════════════════════════════════════════

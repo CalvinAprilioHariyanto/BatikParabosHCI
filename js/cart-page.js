@@ -38,33 +38,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render Items
     cart.forEach(item => {
       // Safe fallback for image
-      const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/tes.jpg';
+      const safeName = item.name || 'Batik Parabos Piece';
+      const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/placeholder.svg';
       const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
-      const lineTotal = item.price * item.quantity;
+      
+      let unitPrice = 'Inquire';
+      let lineTotalDisplay = 'Inquire';
+
+      if (item.priceLabel) {
+        unitPrice = item.priceLabel;
+      } else if (item.price !== null && item.price !== undefined) {
+        unitPrice = formatPrice(item.price);
+      }
+
+      if (item.price !== null && item.price !== undefined) {
+        lineTotalDisplay = formatPrice(item.price * item.quantity);
+      } else {
+        lineTotalDisplay = unitPrice;
+      }
 
       const itemEl = document.createElement('div');
       itemEl.className = 'cart-item';
       
       itemEl.innerHTML = `
-        <img src="${imageSrc}" alt="${item.name}" class="cart-item__image" fetchpriority="high">
+        <img src="${imageSrc}" alt="${safeName}" class="cart-item__image" fetchpriority="high">
         
         <div class="cart-item__details">
-          <h3 class="cart-item__title">${item.name}</h3>
+          <h3 class="cart-item__title">${safeName}</h3>
           ${sizeText ? `<p class="cart-item__size">${sizeText}</p>` : ''}
-          <p class="cart-item__unit-price">${formatPrice(item.price)}</p>
+          <p class="cart-item__unit-price">${unitPrice}</p>
         </div>
 
         <div class="cart-item__actions">
-          <div class="qty-control" aria-label="Quantity for ${item.name}">
+          <div class="qty-control" aria-label="Quantity for ${safeName}">
             <button class="qty-control__btn qty-minus" aria-label="Decrease quantity">−</button>
             <span class="qty-control__val" aria-live="polite">${item.quantity}</span>
             <button class="qty-control__btn qty-plus" aria-label="Increase quantity">+</button>
           </div>
-          <button class="btn-remove" aria-label="Remove ${item.name}">Remove</button>
+          <button class="btn-remove" aria-label="Remove ${safeName} from cart">Remove</button>
         </div>
-
+        
         <div class="cart-item__total">
-          ${formatPrice(lineTotal)}
+          ${lineTotalDisplay}
         </div>
       `;
 

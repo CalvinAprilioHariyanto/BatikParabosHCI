@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════════════════
+   INQUIRE PAGE STYLES
+═══════════════════════════════════════════════════════ */
+
+.inquire-page {
+  padding-top: var(--navbar-h);
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--ivory);
+}
+
+.inquire-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xxl);
+  padding: var(--spacing-xxl) 0;
+}
+
+@media (min-width: 900px) {
+  .inquire-layout {
+    grid-template-columns: 4fr 5fr;
+    align-items: start;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   § PRODUCT PREVIEW (Left Column)
+═══════════════════════════════════════════════════════ */
+.inquire-product-preview {
+  position: sticky;
+  top: calc(var(--navbar-h) + var(--spacing-xl));
+  border: 1px solid var(--line);
+  padding: var(--spacing-lg);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.inquire-product-image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  margin-bottom: var(--spacing-md);
+}
+
+.inquire-product-details h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.05em;
+}
+
+.inquire-product-meta {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.inquire-product-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: var(--spacing-lg);
+}
+
+.inquire-product-specs {
+  border-top: 1px solid var(--line);
+  padding-top: var(--spacing-md);
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+  font-size: var(--text-sm);
+}
+
+.spec-label {
+  color: var(--muted-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.spec-value {
+  color: var(--ivory);
+  text-align: right;
+  max-width: 60%;
+}
+
+/* ═══════════════════════════════════════════════════════
+   § INQUIRY FORM (Right Column)
+═══════════════════════════════════════════════════════ */
+.inquire-form-container {
+  max-width: 600px;
+}
+
+.inquire-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.inquire-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: var(--spacing-sm);
+}
+
+.inquire-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inquire-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Form Styles */
+.form-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--ivory);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: var(--spacing-xs);
+  margin: var(--spacing-xl) 0 var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin-bottom: var(--spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--line);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  padding: 0.75rem 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23C1A57B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form-select option {
+  background-color: var(--bg);
+  color: var(--ivory);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--muted-dim);
+  font-style: italic;
+}
+
+/* Error States */
+.form-group.has-error .form-input,
+.form-group.has-error .form-select,
+.form-group.has-error .form-textarea {
+  border-color: #d9534f;
+}
+
+.error-message {
+  display: none;
+  color: #d9534f;
+  font-size: var(--text-xs);
+  margin-top: 4px;
+}
+
+.form-group.has-error .error-message {
+  display: block;
+}
+
+/* Submit Actions */
+.form-actions {
+  margin-top: var(--spacing-xxl);
+}
+
+/* ═══════════════════════════════════════════════════════
+   § SUCCESS SCREEN / ERROR STATE
+═══════════════════════════════════════════════════════ */
+.inquire-message-screen {
+  text-align: center;
+  padding: var(--spacing-xxl) 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.inquire-message-screen h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--spacing-md);
+}
+
+.inquire-message-screen p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.inquire-reference {
+  display: inline-block;
+  background-color: rgba(193, 165, 123, 0.1);
+  border: 1px solid var(--gold);
+  padding: var(--spacing-md) var(--spacing-xl);
+  margin: var(--spacing-lg) 0 var(--spacing-xxl);
+}
+
+.inquire-reference span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.inquire-reference strong {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+}
+
+.hidden {
+  display: none !important;
+}

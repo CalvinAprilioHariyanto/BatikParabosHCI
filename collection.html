@@ -37,6 +37,12 @@
     <section class="collection-controls-wrap">
       <div class="collection-controls container reveal reveal--delay-2">
         
+        <div class="search-group">
+          <label for="collection-search" class="visually-hidden">Search the collection</label>
+          <input type="search" id="collection-search" class="collection-search-input" placeholder="Search the collection...">
+          <button id="clear-search-btn" class="clear-search-btn hidden" aria-label="Clear search">×</button>
+        </div>
+
         <div class="filter-group">
           <ul class="category-filters" id="category-filters" role="tablist" aria-label="Product Categories">
             <!-- Dynamically populated from products.js -->
@@ -88,6 +94,7 @@
   <script src="js/state/appointments.js"></script>
   
   <script src="js/utils.js"></script>
+  <script src="js/ui-sounds.js"></script>
   <script src="js/components/toast.js"></script>
   <script src="js/components/navbar.js"></script>
   <script src="js/components/footer.js"></script>

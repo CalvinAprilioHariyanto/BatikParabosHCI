@@ -39,20 +39,35 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════════
   function renderProductData() {
     // Breadcrumbs
-    document.getElementById('breadcrumb-category').textContent = product.category;
-    document.getElementById('breadcrumb-name').textContent = product.name;
+    document.getElementById('breadcrumb-category').textContent = product.category || 'Collection';
+    document.getElementById('breadcrumb-name').textContent = product.name || 'Product';
 
     // Info
-    document.getElementById('product-title').textContent = product.name;
-    document.getElementById('product-price').textContent = 
-      typeof window.formatRupiah === 'function' ? window.formatRupiah(product.price) : `IDR ${product.price.toLocaleString()}`;
+    document.getElementById('product-title').textContent = product.name || 'Batik Parabos Piece';
     
-    document.getElementById('product-desc').textContent = product.description;
+    // Price
+    const priceEl = document.getElementById('product-price');
+    const isBespoke = typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product);
+
+    if (isBespoke) {
+      priceEl.textContent = 'Available upon consultation';
+    } else if (product.priceLabel) {
+      priceEl.textContent = product.priceLabel;
+    } else if (product.price !== null && product.price !== undefined) {
+      priceEl.textContent = typeof window.formatRupiah === 'function' 
+        ? window.formatRupiah(product.price) 
+        : `IDR ${product.price.toLocaleString('id-ID')}`;
+    } else {
+      priceEl.textContent = 'Inquire';
+    }
+    
+    document.getElementById('product-desc').textContent = product.description || '';
 
     // Specs
     const motifEl = document.getElementById('product-motif');
     if (product.motif) {
       motifEl.textContent = product.motif;
+      document.getElementById('spec-motif-container').style.display = 'flex';
     } else {
       document.getElementById('spec-motif-container').style.display = 'none';
     }
@@ -60,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const materialEl = document.getElementById('product-material');
     if (product.material) {
       materialEl.textContent = product.material;
+      document.getElementById('spec-material-container').style.display = 'flex';
     } else {
       document.getElementById('spec-material-container').style.display = 'none';
     }
@@ -158,6 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const qtyInput = document.getElementById('qty-input');
     const btnMinus = document.getElementById('qty-minus');
     const btnPlus = document.getElementById('qty-plus');
+    const qtySection = qtyInput ? qtyInput.closest('.product-quantity') : null;
+
+    if (typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product)) {
+      if (qtySection) qtySection.style.display = 'none';
+      return;
+    }
 
     function updateQty(newVal) {
       let val = parseInt(newVal);
@@ -171,12 +193,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══════════════════════════════════════════════════════
-  // § PURCHASE ACTIONS (Add to Cart / Buy Now)
+  // § PURCHASE ACTIONS (Add to Cart / Buy Now / Inquire)
   // ═══════════════════════════════════════════════════════
   function initActions() {
     const btnAdd = document.getElementById('add-to-cart-btn');
     const btnBuy = document.getElementById('buy-now-btn');
+    const btnInquire = document.getElementById('inquire-btn');
     const qtyInput = document.getElementById('qty-input');
+
+    const isBespoke = typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product);
+
+    if (isBespoke) {
+      if (btnAdd) btnAdd.style.display = 'none';
+      if (btnBuy) btnBuy.style.display = 'none';
+      if (btnInquire) {
+        btnInquire.style.display = 'flex';
+        btnInquire.addEventListener('click', () => {
+          window.location.href = `inquire.html?product=${product.id}`;
+        });
+      }
+      return;
+    }
 
     function handlePurchase(isBuyNow = false) {
       if (hasSizes && !selectedSize) {

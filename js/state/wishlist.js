@@ -9,6 +9,7 @@ function addToWishlist(productId) {
     window.parabosStorage.safeSet(window.parabosStorage.KEYS.WISHLIST, wishlist);
     document.dispatchEvent(new Event('wishlistUpdated'));
     if (window.showToast) window.showToast("Added to wishlist", "success");
+    if (window.playUISound) window.playUISound('add-to-wishlist');
   }
 }
 

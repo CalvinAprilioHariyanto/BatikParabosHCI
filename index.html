@@ -565,6 +565,15 @@
 
   </main><!-- /#main-content -->
 
+  <!-- Sound toggle — shown only near the craft-story section -->
+  <button class="sound-toggle" id="sound-toggle"
+          type="button"
+          aria-label="Toggle ambient sound"
+          aria-pressed="false">
+    <span class="sound-toggle__icon" aria-hidden="true"></span>
+    <span class="sound-toggle__label">Sound</span>
+  </button>
+
 
   <!-- ══════════════════════════════════════════════════════
        SCRIPTS — Foundation first, then page-specific
@@ -580,12 +589,14 @@
 
   <!-- Foundation: utilities & shared components -->
   <script src="js/utils.js"></script>
+  <script src="js/ui-sounds.js"></script>
   <script src="js/components/toast.js"></script>
   <script src="js/components/navbar.js"></script>
   <script src="js/components/footer.js"></script>
 
   <!-- Page-specific -->
   <script src="js/homepage.js"></script>
+  <script src="js/soundscape.js"></script>
 
 </body>
 </html>

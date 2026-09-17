@@ -150,9 +150,11 @@
 }
 
 .experience-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   cursor: pointer;
+  height: 100%;
 }
 
 .experience-card input[type="radio"] {
@@ -167,18 +169,21 @@
   background-color: var(--bg);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .experience-card:hover .experience-card__content {
   border-color: rgba(167, 160, 151, 0.5);
 }
 
-.experience-card input[type="radio"]:checked + .experience-card__content {
+.experience-card input[type="radio"]:checked+.experience-card__content {
   border-color: var(--gold);
   box-shadow: inset 0 0 0 1px var(--gold);
 }
 
-.experience-card input[type="radio"]:focus-visible + .experience-card__content {
+.experience-card input[type="radio"]:focus-visible+.experience-card__content {
   outline: 2px solid var(--ivory);
   outline-offset: 2px;
 }
@@ -186,7 +191,7 @@
 /* Image strip at top of each card */
 .experience-card__image {
   width: 100%;
-  aspect-ratio: 3/2;
+  aspect-ratio: 16/9;
   overflow: hidden;
   position: relative;
   background-color: var(--surface-1);
@@ -213,7 +218,7 @@
   transition: background 0.25s ease;
 }
 
-.experience-card input[type="radio"]:checked ~ .experience-card__content .experience-card__image::after {
+.experience-card input[type="radio"]:checked~.experience-card__content .experience-card__image::after {
   background: rgba(201, 162, 39, 0.08);
 }
 
@@ -243,18 +248,21 @@
   transition: background 0.2s ease;
 }
 
-.experience-card input[type="radio"]:checked + .experience-card__content .experience-card__marker {
+.experience-card input[type="radio"]:checked+.experience-card__content .experience-card__marker {
   border-color: var(--gold);
   background: var(--gold);
 }
 
-.experience-card input[type="radio"]:checked + .experience-card__content .experience-card__marker::after {
+.experience-card input[type="radio"]:checked+.experience-card__content .experience-card__marker::after {
   background: var(--bg);
 }
 
 /* Text area */
 .experience-card__text {
   padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .experience-card__title {
@@ -270,6 +278,27 @@
   font-size: var(--text-sm);
   color: var(--muted);
   line-height: 1.6;
+}
+
+/* Atelier CTA wrapper */
+.atelier-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.atelier-continue-btn {
+  width: 100%;
+  max-width: 300px;
+  min-height: 52px;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .atelier-continue-btn {
+    width: 280px;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -311,7 +340,8 @@
   font-family: var(--font-body);
   font-size: var(--text-md);
   transition: border-color var(--transition-fast);
-  appearance: none; /* Native select reset */
+  appearance: none;
+  /* Native select reset */
   border-radius: 0;
 }
 
@@ -455,3 +485,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-direction: row;
   }
 }
+

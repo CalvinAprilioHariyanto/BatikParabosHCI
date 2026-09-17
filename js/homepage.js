@@ -171,6 +171,11 @@
       if (idx === currentStage) return;
       currentStage = idx;
 
+      // Notify soundscape of stage change
+      if (window.parabos_soundscape) {
+        window.parabos_soundscape.setStage(idx);
+      }
+
       // Layers
       layers.forEach((layer, i) => {
         layer.classList.toggle('is-active', i === idx);
@@ -237,36 +242,47 @@
       : (val) => `Rp ${val.toLocaleString('id-ID')}`;
 
     featured.forEach((product, i) => {
-      const price    = formatPrice(product.price);
-      const imgSrc   = (product.images && product.images.length > 0)
+      // Safely extract properties
+      const safeMotif = product.motif || 'Signature Batik Motif';
+      const safeMaterial = product.material || 'Premium Batik Textile';
+      const safeCategory = product.category || 'Collection';
+      const safeName = product.name || 'Batik Parabos Piece';
+
+      let price = 'Inquire';
+      if (product.priceLabel) {
+        price = product.priceLabel;
+      } else if (product.price !== null && product.price !== undefined) {
+        price = typeof window.formatRupiah === 'function'
+          ? window.formatRupiah(product.price)
+          : `IDR ${product.price.toLocaleString('id-ID')}`;
+      }
+
+      const imgSrc = (product.images && product.images.length > 0)
         ? product.images[0]
-        : 'assets/images/tes.jpg';
+        : 'assets/images/placeholder.svg';
+
+      const isBespoke = typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product);
+      const overlayText = isBespoke ? 'INQUIRE' : 'View Piece';
 
       const card = document.createElement('article');
-      card.className = `product-card reveal reveal--delay-${i + 1}`;
-      card.setAttribute('role', 'listitem');
-
+      card.className = 'product-card reveal';
       card.innerHTML = `
-        <a href="product.html?id=${product.id}" class="product-card__link" aria-label="View ${product.name}">
+        <a href="${isBespoke ? `inquire.html?product=${product.id}` : `product.html?id=${product.id}`}" class="product-card__link" aria-label="${overlayText} ${safeName}">
           <div class="product-card__image-wrap">
             <img
               src="${imgSrc}"
-              alt="${product.name} — ${product.motif || product.category} motif"
+              alt="${safeName} — ${safeMotif} motif"
               loading="lazy"
-              width="600"
-              height="800"
             >
-            ${product.type === 'custom'
-              ? '<span class="product-card__type-badge">Bespoke</span>'
-              : ''}
+            ${product.type === 'custom' || product.type === 'Jacket' || product.type === 'Blazer' ? '<span class="product-card__type-badge">Bespoke</span>' : ''}
             <div class="product-card__overlay">
-              <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">View Piece</span>
+              <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">${overlayText}</span>
             </div>
           </div>
           <div class="product-card__body">
-            <span class="product-card__category">${product.category}</span>
-            <h3 class="product-card__name">${product.name}</h3>
-            ${product.motif ? `<p class="product-card__motif">${product.motif} · ${product.material}</p>` : ''}
+            <span class="product-card__category">${safeCategory}</span>
+            <h3 class="product-card__name">${safeName}</h3>
+            <p class="product-card__motif">${safeMotif} · ${safeMaterial}</p>
             <p class="product-card__price">${price}</p>
           </div>
         </a>

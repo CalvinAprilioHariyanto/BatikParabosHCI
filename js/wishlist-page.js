@@ -36,32 +36,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render Items — use the same product-card structure as collection.js
     savedProducts.forEach(product => {
-      const imageSrc  = (product.images && product.images.length > 0) ? product.images[0] : 'assets/images/tes.jpg';
       const detailUrl = `product.html?id=${product.id}`;
-      const price     = formatPrice(product.price);
+
+      // Safely extract properties
+      const safeMotif    = product.motif || 'Signature Batik Motif';
+      const safeMaterial = product.material || 'Premium Batik Textile';
+      const safeCategory = product.category || 'Collection';
+      const safeName     = product.name || 'Batik Parabos Piece';
+
+      let price = 'Inquire';
+      if (product.priceLabel) {
+        price = product.priceLabel;
+      } else if (product.price !== null && product.price !== undefined) {
+        price = typeof window.formatRupiah === 'function'
+          ? window.formatRupiah(product.price)
+          : `IDR ${product.price.toLocaleString('id-ID')}`;
+      }
+
+      const isBespoke = typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product);
+      const overlayText = isBespoke ? 'INQUIRE' : 'View Piece';
+      const actualUrl = isBespoke ? `inquire.html?product=${product.id}` : detailUrl;
 
       const card = document.createElement('article');
-      card.className = 'product-card';
+      card.className = 'product-card reveal';
 
       card.innerHTML = `
-        <a href="${detailUrl}" class="product-card__link" aria-label="View ${product.name}">
+        <a href="${actualUrl}" class="product-card__link" aria-label="${overlayText} ${safeName}">
           <div class="product-card__image-wrap">
             <img
-              src="${imageSrc}"
-              alt="${product.name}"
+              src="${product.images && product.images.length > 0 ? product.images[0] : 'assets/images/placeholder.svg'}"
+              alt="${safeName}"
               loading="lazy"
             >
             <div class="product-card__overlay">
-              <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">View Piece</span>
+              <span class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;">${overlayText}</span>
             </div>
           </div>
           <div class="product-card__body">
-            <span class="product-card__category">${product.category}</span>
-            <h3 class="product-card__name">${product.name}</h3>
-            ${product.motif ? `<p class="product-card__motif">${product.motif} · ${product.material}</p>` : ''}
+            <span class="product-card__category">${safeCategory}</span>
+            <h3 class="product-card__name">${safeName}</h3>
+            <p class="product-card__motif">${safeMotif} · ${safeMaterial}</p>
             <div class="wishlist-card-actions">
               <p class="product-card__price">${price}</p>
-              <button class="btn-remove-wishlist" aria-label="Remove ${product.name} from wishlist">Remove</button>
+              <button class="btn-remove-wishlist" aria-label="Remove ${safeName} from wishlist">Remove</button>
             </div>
           </div>
         </a>
@@ -80,6 +97,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       wishlistGrid.appendChild(card);
     });
+
+    initScrollReveal();
+  }
+
+  function initScrollReveal() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => observer.observe(el));
   }
 
   // Initial Render

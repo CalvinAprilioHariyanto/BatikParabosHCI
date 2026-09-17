@@ -95,21 +95,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (order.items && order.items.length > 0) {
       order.items.forEach(item => {
-        const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/tes.jpg';
+        const imageSrc = (item.images && item.images.length > 0) ? item.images[0] : 'assets/images/placeholder.svg';
         const sizeText = item.size && item.size !== 'OS' ? `Size: ${item.size}` : '';
-        const lineTotal = item.price * item.quantity;
-
+        const safeName = item.name || 'Batik Parabos Piece';
+        
+        let lineTotalDisplay = 'Inquire';
+        if (item.priceLabel) {
+          lineTotalDisplay = item.priceLabel;
+        } else if (item.price !== null && item.price !== undefined) {
+          lineTotalDisplay = typeof window.formatRupiah === 'function' ? window.formatRupiah(item.price * (item.quantity || 1)) : `IDR ${(item.price * (item.quantity || 1)).toLocaleString()}`;
+        }
+        
         const itemEl = document.createElement('div');
         itemEl.className = 'order-item';
         itemEl.innerHTML = `
-          <img src="${imageSrc}" alt="${item.name}" class="order-item__image" loading="lazy">
+          <img src="${imageSrc}" alt="${safeName}" class="order-item__image" loading="lazy">
           <div class="order-item__details">
-            <h4 class="order-item__title">${item.name}</h4>
+            <h4 class="order-item__title">${safeName}</h4>
             ${sizeText ? `<span class="order-item__meta">${sizeText}</span>` : ''}
-            <span class="order-item__meta">Qty: ${item.quantity}</span>
+            <span class="order-item__meta">Qty: ${item.quantity || 1}</span>
           </div>
           <div class="order-item__price">
-            ${formatPrice(lineTotal)}
+            ${lineTotalDisplay}
           </div>
         `;
         itemsContainer.appendChild(itemEl);

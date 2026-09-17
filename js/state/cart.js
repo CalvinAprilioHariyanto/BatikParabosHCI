@@ -1,5 +1,12 @@
 function getCart() {
-  return window.parabosStorage.safeGet(window.parabosStorage.KEYS.CART, []);
+  const rawCart = window.parabosStorage.safeGet(window.parabosStorage.KEYS.CART, []);
+  // Securely filter out any inquiry products that might have slipped into localStorage
+  return rawCart.filter(item => {
+    if (typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(item)) {
+      return false;
+    }
+    return true;
+  });
 }
 
 function setCart(cart) {
@@ -12,6 +19,10 @@ function addToCart(product, size, quantity) {
     if (window.showToast) window.showToast("Custom products cannot be added to cart.", "error");
     return;
   }
+  if (typeof window.isInquiryOnly === 'function' && window.isInquiryOnly(product)) {
+    if (window.showToast) window.showToast("This product is for inquiry only.", "error");
+    return;
+  }
   const cart = getCart();
   const existingItemIndex = cart.findIndex(item => item.id === product.id && item.size === size);
   
@@ -22,6 +33,7 @@ function addToCart(product, size, quantity) {
   }
   setCart(cart);
   if (window.showToast) window.showToast("Added to cart", "success");
+  if (window.playUISound) window.playUISound('add-to-cart');
 }
 
 function removeFromCart(itemId, size) {

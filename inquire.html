@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inquire about custom and bespoke Batik Parabos pieces.">
+  <title>Inquire / Customize — Batik Parabos</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  
+  <!-- Page Specific CSS -->
+  <link rel="stylesheet" href="css/inquire.css">
+</head>
+<body class="inquire-page">
+
+  <!-- JS will inject Navbar here -->
+  <div id="navbar-container"></div>
+
+  <main id="main-content" class="container">
+    
+    <!-- MAIN INQUIRY LAYOUT -->
+    <section class="inquire-layout" id="inquire-layout">
+      
+      <!-- LEFT: PRODUCT PREVIEW -->
+      <aside class="inquire-product-preview reveal">
+        <img src="" alt="Product" id="preview-image" class="inquire-product-image">
+        <div class="inquire-product-details">
+          <span class="inquire-product-meta" id="preview-category">Category</span>
+          <h2 id="preview-name">Product Name</h2>
+          <p class="inquire-product-desc" id="preview-desc">Product description goes here.</p>
+          
+          <div class="inquire-product-specs">
+            <div class="spec-item" id="spec-motif-wrap">
+              <span class="spec-label">Motif</span>
+              <span class="spec-value" id="preview-motif">Motif</span>
+            </div>
+            <div class="spec-item" id="spec-material-wrap">
+              <span class="spec-label">Material</span>
+              <span class="spec-value" id="preview-material">Material</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Price</span>
+              <span class="spec-value">Available upon consultation</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT: FORM -->
+      <div class="inquire-form-container reveal reveal--delay-1">
+        <header class="inquire-header">
+          <span class="inquire-eyebrow">Private Atelier Inquiry</span>
+          <h1 class="inquire-title">Create Something Distinct.</h1>
+          <p class="inquire-subtitle">Our master artisans look forward to crafting a piece that perfectly aligns with your vision. Please share your preferences below, and our atelier team will contact you to refine the details and finalize pricing.</p>
+        </header>
+
+        <form id="inquiry-form" novalidate>
+          
+          <h3 class="form-section-title">Personalization Details</h3>
+          
+          <div class="form-group" id="group-size">
+            <label for="input-size" class="form-label">Size <span aria-hidden="true">*</span></label>
+            <select id="input-size" class="form-select" required>
+              <option value="" disabled selected>Select a size...</option>
+              <!-- Options injected by JS -->
+            </select>
+            <span class="error-message">Please select a size.</span>
+          </div>
+
+          <div class="form-group" id="group-quantity">
+            <label for="input-qty" class="form-label">Quantity <span aria-hidden="true">*</span></label>
+            <input type="number" id="input-qty" class="form-input" min="1" value="1" required>
+            <span class="error-message">Quantity must be at least 1.</span>
+          </div>
+
+          <div class="form-group" id="group-color">
+            <label for="input-color" class="form-label">Preferred Color</label>
+            <input type="text" id="input-color" class="form-input" placeholder="e.g. Deep indigo, sogan brown, ivory...">
+          </div>
+
+          <div class="form-group" id="group-motif">
+            <label for="input-motif" class="form-label">Motif / Pattern Preference</label>
+            <textarea id="input-motif" class="form-textarea" placeholder="Describe any motif or pattern direction you have in mind..."></textarea>
+          </div>
+
+          <div class="form-group" id="group-custom">
+            <label for="input-custom" class="form-label">Customization Request <span aria-hidden="true">*</span></label>
+            <textarea id="input-custom" class="form-textarea" required placeholder="Tell us what you would like to personalize..."></textarea>
+            <span class="error-message">Please provide details for your customization request.</span>
+          </div>
+
+          <h3 class="form-section-title">Client Details</h3>
+
+          <div class="form-group" id="group-name">
+            <label for="input-name" class="form-label">Full Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="input-name" class="form-input" required placeholder="Your full name">
+            <span class="error-message">Full name is required.</span>
+          </div>
+
+          <div class="form-group" id="group-email">
+            <label for="input-email" class="form-label">Email Address <span aria-hidden="true">*</span></label>
+            <input type="email" id="input-email" class="form-input" required placeholder="name@example.com">
+            <span class="error-message">Please provide a valid email address.</span>
+          </div>
+
+          <div class="form-group" id="group-phone">
+            <label for="input-phone" class="form-label">Phone / WhatsApp <span aria-hidden="true">*</span></label>
+            <input type="tel" id="input-phone" class="form-input" required placeholder="+62 812 3456 7890">
+            <span class="error-message">Phone number is required.</span>
+          </div>
+
+          <div class="form-group" id="group-notes">
+            <label for="input-notes" class="form-label">Additional Notes</label>
+            <textarea id="input-notes" class="form-textarea" placeholder="Any other details we should know?"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-block">SEND INQUIRY</button>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+
+    <!-- ERROR / INVALID PRODUCT STATE -->
+    <section id="error-screen" class="inquire-message-screen hidden">
+      <h2>Piece Not Found</h2>
+      <p>The selected piece could not be located in our collection, or it is not available for customization.</p>
+      <a href="collection.html" class="btn btn-primary">Return to Collection</a>
+    </section>
+
+    <!-- SUCCESS SCREEN -->
+    <section id="success-screen" class="inquire-message-screen hidden">
+      <h2>Inquiry Received</h2>
+      <p>Your request has been received by the Parabos Atelier.</p>
+      
+      <div class="inquire-reference">
+        <span>Reference Number</span>
+        <strong id="reference-number">PA-XXXXXX</strong>
+      </div>
+
+      <p>Our atelier team will review your customization request and follow up with you regarding the next steps and final pricing.</p>
+      <br>
+      <a href="collection.html" class="btn btn-secondary">Back to Collection</a>
+    </section>
+
+  </main>
+
+  <!-- JS will inject Footer here -->
+  <div id="footer-container"></div>
+  
+  <!-- Global Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="js/data/products.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui-sounds.js"></script>
+  <script src="js/components/navbar.js"></script>
+  <script src="js/components/footer.js"></script>
+  <script src="js/inquire-page.js"></script>
+</body>
+</html>
