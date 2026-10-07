@@ -9,9 +9,12 @@ function renderNavbar() {
     <nav class="navbar navbar--transparent" id="main-navbar" role="navigation" aria-label="Main navigation">
       <div class="container navbar-container">
 
-        <a href="index.html" class="navbar-brand" aria-label="Batik Parabos Home">
+      <div style="display: flex; align-items: center; gap: 10px;"> 
+              <img style="width: 100px;" src="assets/images/logo.png" alt="Logo"></img>
+        <a style="color: #C9A227" href="index.html" class="navbar-brand" aria-label="Batik Parabos Home">
           Batik Parabos
         </a>
+      </div>
 
         <ul class="navbar-nav" role="list">
           <li><a href="collection.html">Collection</a></li>
